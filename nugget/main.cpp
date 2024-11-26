@@ -1,13 +1,16 @@
 #include "RenderSystemRaylib.h"
+#include "AudioSystemRaylib.h"
+#include "InputSystemRaylib.h"
 
 using namespace nugget;
 
 int main() {
-	nugRenderSystem->Initalize();
-	nugRenderSystem->setWindowParams(600, 600, "Nugget Engine");
+	nugRender->Initalize();
+	nugRender->setWindowParams(600, 600, "Nugget Engine");
 	SetWindowIcon(LoadImage("assets/images/mudkip.png"));
-	
-	InitAudioDevice();
+
+	nugAudio->Initalize();
+	SetMasterVolume(0.5);
 	SetTargetFPS(60);
 
 	Texture2D tex = LoadTexture("assets/images/mudkip.png");
@@ -15,38 +18,43 @@ int main() {
 
 	Rectangle rect{ 250,250,250,100 };
 
-	int key(0);
-
 	while (!WindowShouldClose()) {
 
-		if (IsKeyDown(KEY_A)) rect.x -= 100 * GetFrameTime();
+		int keys[5] = { KEY_A, KEY_W, KEY_S, KEY_D, KEY_NULL };
+		nugInput->KeyList(keys);
 
-		nugRenderSystem->StartDrawing();
-		nugRenderSystem->Clear(BLUE);
-		
-		//SetShapesTexture(tex, Rectangle{0,0, (float)tex.width, (float)tex.height });
+		for (int key : keys) {
+			switch (key)
+			{
+			case KEY_A:
+				rect.x -= 100 * GetFrameTime(); break;
+			case KEY_D:
+				rect.x += 100 * GetFrameTime(); break;
+			case KEY_W:
+				rect.y -= 100 * GetFrameTime(); break;
+			case KEY_S:
+				rect.y += 100 * GetFrameTime(); break;
+			default:
+				break;
+			}
+		}
 
-		//DrawPoly(Vector2{ 150,150 }, 6, 100, 0, WHITE);
+		nugRender->StartDrawing();
+		nugRender->Clear(BLUE);
 
-		//DrawCircle(300,50, 100, WHITE);
+		nugRender->Text("Hello World", 100, 500, 20, BLACK);
 
-		//DrawRectangleRec(Rectangle{position.x,250,250,100 }, WHITE);
-
-		//nugRenderSystemRL->DrawRect(&tex, &rect);
-
-		nugRenderSystem->Text("Hello World", 100, 500, 20, BLACK);
-
-		nugRenderSystem->DrawRect(&tex, &rect);
+		nugRender->DrawRect(&tex, &rect);
 
 		//DrawTexture(tex, 300, 300, WHITE);
-		nugRenderSystem->FinishDrawing();
+		nugRender->FinishDrawing();
 
-		if (!IsSoundPlaying(yipee)) PlaySound(yipee);
+		nugAudio->PlayNoise(&yipee);
 	}
 
 	UnloadTexture(tex);
 	UnloadSound(yipee);
 
-	CloseAudioDevice();
-	nugRenderSystem->Shutdown();
+	nugAudio->Shutdown();
+	nugRender->Shutdown();
 }

@@ -12,7 +12,7 @@ namespace nugget {
 		void Initalize() final;
 		void Shutdown() final;
 
-		void setWindowParams(int width, int height, const char* title);
+		void setWindowParams(int width, int height, const char* title) final;
 
 		int getWidth() final;
 		int getHeight() final;
@@ -21,13 +21,7 @@ namespace nugget {
 		void FinishDrawing() final;
 		void Clear(Color color) final;
 
-		void DrawRect(Texture2D* texture, Rectangle* rect);
-		void Text(const char* text, int pos_x, int pos_y, int font_size, Color color);
-
-	private:
-		int win_width;
-		int win_height;
+		void DrawRect(Texture2D* texture, Rectangle* rect) final;
+		void Text(const char* text, int pos_x, int pos_y, int font_size, Color color) final;
 	};
-
-	extern RenderSystemRaylib* nugRenderSystem;
 }

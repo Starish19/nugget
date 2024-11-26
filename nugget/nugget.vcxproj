@@ -130,11 +130,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioSystem.cpp" />
+    <ClCompile Include="AudioSystemRaylib.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="InputSystemRaylib.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="RenderSystemRaylib.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioSystem.h" />
+    <ClInclude Include="AudioSystemRaylib.h" />
+    <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="InputSystemRaylib.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="RenderSystemRaylib.h" />
     <ClInclude Include="subsystem.h" />
