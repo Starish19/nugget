@@ -2,18 +2,57 @@
 #include "AudioSystemRaylib.h"
 #include "InputSystemRaylib.h"
 
+#include "unzip.h"
+
 using namespace nugget;
 
 int main() {
-	nugRender->Initalize();
-	nugRender->setWindowParams(600, 600, "Nugget Engine");
+	nugget::nugRender->Initalize();
+	nugget::nugRender->setWindowParams(600, 600, "Nugget Engine");
 	SetWindowIcon(LoadImage("assets/images/mudkip.png"));
 
-	nugAudio->Initalize();
+	nugget::nugAudio->Initalize();
 	SetMasterVolume(0.5);
 	SetTargetFPS(60);
 
-	Texture2D tex = LoadTexture("assets/images/mudkip.png");
+	unzFile ziphandle = unzOpen64("assets.zip");
+
+	int size = 1024 * 75;
+	unsigned char* buff = new unsigned char[size];
+
+	int result = unzLocateFile(ziphandle, "assets/images/mudkip.png", 1);
+	int totalread = 0;
+	int read = 0;
+	if (result == UNZ_OK) {
+		result = unzOpenCurrentFile(ziphandle);
+		int num = 0;
+		while ((read = unzReadCurrentFile(ziphandle, &(buff[num * size]), size)) > 0) {
+
+			if (read == size) {
+				num++;
+				unsigned char* temp = new unsigned char[size*2*num];
+				temp = std::move(buff);
+				buff = temp;
+			}
+
+			totalread += read;
+
+		}
+		//unzCloseCurrentFile(ziphandle);
+	}
+
+	//unzClose(ziphandle);
+
+	/*buff[totalread] = '\0';
+	printf("Test: ");
+	printf(buff);
+	printf("\n\n");*/
+
+	Image img = LoadImageFromMemory(".png", buff, totalread);
+
+	Texture2D tex = LoadTextureFromImage(img);
+
+	//Texture2D tex = LoadTexture("assets/images/mudkip.png");
 	Sound yipee = LoadSound("assets/audio/yipee.mp3");
 
 	Rectangle rect{ 250,250,250,100 };
@@ -39,22 +78,22 @@ int main() {
 			}
 		}
 
-		nugRender->StartDrawing();
-		nugRender->Clear(BLUE);
+		nugget::nugRender->StartDrawing();
+		nugget::nugRender->Clear(BLUE);
 
-		nugRender->Text("Hello World", 100, 500, 20, BLACK);
+		nugget::nugRender->Text("Hello World", 100, 500, 20, BLACK);
 
-		nugRender->DrawRect(&tex, &rect);
+		nugget::nugRender->DrawRect(&tex, &rect);
 
 		//DrawTexture(tex, 300, 300, WHITE);
-		nugRender->FinishDrawing();
+		nugget::nugRender->FinishDrawing();
 
-		nugAudio->PlayNoise(&yipee);
+		nugget::nugAudio->PlayNoise(&yipee);
 	}
 
 	UnloadTexture(tex);
 	UnloadSound(yipee);
 
-	nugAudio->Shutdown();
-	nugRender->Shutdown();
+	nugget::nugAudio->Shutdown();
+	nugget::nugRender->Shutdown();
 }

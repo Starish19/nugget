@@ -1,7 +1,9 @@
 #include "AudioSystemRaylib.h"
 
-nugget::AudioSystemRaylib nugAudioSystemRaylib;
-nugget::AudioSystem* nugget::nugAudio = &nugAudioSystemRaylib;
+#ifdef AUDIOSYSTEM_RAYLIB
+	nugget::AudioSystemRaylib nugAudioSystemRaylib;
+	nugget::AudioSystem* nugget::nugAudio = &nugAudioSystemRaylib;
+#endif
 
 nugget::AudioSystemRaylib::AudioSystemRaylib() {
 

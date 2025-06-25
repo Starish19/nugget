@@ -1,7 +1,9 @@
 #include "InputSystemRaylib.h"
 
-nugget::InputSystemRaylib nugInputSystemRaylib;
-nugget::InputSystem* nugget::nugInput = &nugInputSystemRaylib;
+#ifdef INPUTSYSTEM_RAYLIB
+	nugget::InputSystemRaylib nugInputSystemRaylib;
+	nugget::InputSystem* nugget::nugInput = &nugInputSystemRaylib;
+#endif
 
 nugget::InputSystemRaylib::InputSystemRaylib() {
 

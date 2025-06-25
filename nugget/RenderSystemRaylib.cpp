@@ -1,7 +1,11 @@
 #include "RenderSystemRaylib.h"
 
-nugget::RenderSystemRaylib nugRenderSystemRaylib;
-nugget::RenderSystem* nugget::nugRender = &nugRenderSystemRaylib;
+
+#ifdef RENDERSYSTEM_RAYLIB
+	nugget::RenderSystemRaylib nugRenderSystemRaylib;
+	nugget::RenderSystem* nugget::nugRender = &nugRenderSystemRaylib;
+#endif
+
 
 nugget::RenderSystemRaylib::RenderSystemRaylib() {
 

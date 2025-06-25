@@ -19,9 +19,6 @@
     <Filter Include="Header Files\Raylib">
       <UniqueIdentifier>{7d57b3e4-5c75-4f09-99b6-7df899e077aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Delete%3f">
-      <UniqueIdentifier>{5315f028-f53d-43d6-bb0c-35343fb8da90}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -35,15 +32,6 @@
     </ClCompile>
     <ClCompile Include="InputSystemRaylib.cpp">
       <Filter>Source Files\Raylib</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderSystem.cpp">
-      <Filter>Source Files\Delete%3f</Filter>
-    </ClCompile>
-    <ClCompile Include="InputSystem.cpp">
-      <Filter>Source Files\Delete%3f</Filter>
-    </ClCompile>
-    <ClCompile Include="AudioSystem.cpp">
-      <Filter>Source Files\Delete%3f</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
