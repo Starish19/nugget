@@ -3,6 +3,7 @@
 #include "InputSystemRaylib.h"
 
 #include "unzip.h"
+#include <vector>
 
 using namespace nugget;
 
@@ -17,38 +18,27 @@ int main() {
 
 	unzFile ziphandle = unzOpen64("assets.zip");
 
-	int size = 1024 * 75;
-	unsigned char* buff = new unsigned char[size];
+	const int size = 1024 * 150;
+	unsigned char buffers[3][size];
 
 	int result = unzLocateFile(ziphandle, "assets/images/mudkip.png", 1);
 	int totalread = 0;
-	int read = 0;
+	int read;
 	if (result == UNZ_OK) {
 		result = unzOpenCurrentFile(ziphandle);
-		int num = 0;
-		while ((read = unzReadCurrentFile(ziphandle, &(buff[num * size]), size)) > 0) {
-
-			if (read == size) {
-				num++;
-				unsigned char* temp = new unsigned char[size*2*num];
-				temp = std::move(buff);
-				buff = temp;
-			}
-
+		for (int i = 0; (read = unzReadCurrentFile(ziphandle, &(buffers[i][0]), size)) > 0; i++) {
 			totalread += read;
-
 		}
-		//unzCloseCurrentFile(ziphandle);
+		unzCloseCurrentFile(ziphandle);
 	}
-
-	//unzClose(ziphandle);
+	unzClose(ziphandle);
 
 	/*buff[totalread] = '\0';
 	printf("Test: ");
 	printf(buff);
 	printf("\n\n");*/
 
-	Image img = LoadImageFromMemory(".png", buff, totalread);
+	Image img = LoadImageFromMemory(".png", &(buffers[0][0]), totalread);
 
 	Texture2D tex = LoadTextureFromImage(img);
 
