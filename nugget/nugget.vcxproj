@@ -102,7 +102,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RENDERSYSTEM_RAYLIB;AUDIOSYSTEM_RAYLIB;INPUTSYSTEM_RAYLIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RENDERSYSTEM_RAYLIB;AUDIOSYSTEM_RAYLIB;INPUTSYSTEM_RAYLIB;RESOURCESYSTEMNUGGET;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)include\raylib;$(SolutionDir)include\minizip;$(SolutionDir)include\zlib;</AdditionalIncludeDirectories>
     </ClCompile>
@@ -134,6 +134,7 @@
     <ClCompile Include="InputSystemRaylib.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RenderSystemRaylib.cpp" />
+    <ClCompile Include="ResourceSystemNugget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioSystem.h" />
@@ -142,6 +143,8 @@
     <ClInclude Include="InputSystemRaylib.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="RenderSystemRaylib.h" />
+    <ClInclude Include="ResourceSystem.h" />
+    <ClInclude Include="ResourceSystemNugget.h" />
     <ClInclude Include="subsystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

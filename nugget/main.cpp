@@ -1,11 +1,9 @@
 #include "RenderSystemRaylib.h"
 #include "AudioSystemRaylib.h"
 #include "InputSystemRaylib.h"
+#include "ResourceSystemNugget.h"
 
-#include "unzip.h"
 #include <vector>
-
-using namespace nugget;
 
 int main() {
 	nugget::nugRender->Initalize();
@@ -16,10 +14,12 @@ int main() {
 	SetMasterVolume(0.5);
 	SetTargetFPS(60);
 
+	nugget::nugResource->Initalize();
+
 	unzFile ziphandle = unzOpen64("assets.zip");
 
-	const int size = 1024 * 150;
-	unsigned char buffers[3][size];
+	const int size = 50000;
+	unsigned char buffers[10][size];
 
 	int result = unzLocateFile(ziphandle, "assets/images/mudkip.png", 1);
 	int totalread = 0;
@@ -37,7 +37,7 @@ int main() {
 	printf("Test: ");
 	printf(buff);
 	printf("\n\n");*/
-
+	
 	Image img = LoadImageFromMemory(".png", &(buffers[0][0]), totalread);
 
 	Texture2D tex = LoadTextureFromImage(img);
@@ -50,7 +50,7 @@ int main() {
 	while (!WindowShouldClose()) {
 
 		int keys[5] = { KEY_A, KEY_W, KEY_S, KEY_D, KEY_NULL };
-		nugInput->KeyList(keys);
+		nugget::nugInput->KeyList(keys);
 
 		for (int key : keys) {
 			switch (key)
@@ -86,4 +86,5 @@ int main() {
 
 	nugget::nugAudio->Shutdown();
 	nugget::nugRender->Shutdown();
+	nugget::nugResource->Shutdown();
 }
