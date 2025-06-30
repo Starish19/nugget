@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "InputSystemRaylib.h"
 
 #ifdef INPUTSYSTEM_RAYLIB

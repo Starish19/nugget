@@ -1,9 +1,8 @@
+#include "stdafx.h"
 #include "RenderSystemRaylib.h"
 #include "AudioSystemRaylib.h"
 #include "InputSystemRaylib.h"
-#include "ResourceSystemNugget.h"
-
-#include <vector>
+#include "zipFile.h"
 
 int main() {
 	nugget::nugRender->Initalize();
@@ -12,38 +11,22 @@ int main() {
 
 	nugget::nugAudio->Initalize();
 	SetMasterVolume(0.5);
-	SetTargetFPS(60);
+	SetTargetFPS(30);
 
-	nugget::nugResource->Initalize();
+	nugget::zipFile file("assets.zip");
 
-	unzFile ziphandle = unzOpen64("assets.zip");
+	const int size = 13000;
+	std::vector<std::vector<unsigned char>> buffers(2);
+	buffers[0].resize(size);
+	buffers[1].resize(size);
 
-	const int size = 50000;
-	unsigned char buffers[10][size];
-
-	int result = unzLocateFile(ziphandle, "assets/images/mudkip.png", 1);
-	int totalread = 0;
-	int read;
-	if (result == UNZ_OK) {
-		result = unzOpenCurrentFile(ziphandle);
-		for (int i = 0; (read = unzReadCurrentFile(ziphandle, &(buffers[i][0]), size)) > 0; i++) {
-			totalread += read;
-		}
-		unzCloseCurrentFile(ziphandle);
-	}
-	unzClose(ziphandle);
-
-	/*buff[totalread] = '\0';
-	printf("Test: ");
-	printf(buff);
-	printf("\n\n");*/
-	
-	Image img = LoadImageFromMemory(".png", &(buffers[0][0]), totalread);
-
+	int totalread = file.LoadData("assets/images/mudkip.png", buffers[0]);
+	Image img = LoadImageFromMemory(".png", &buffers[0][0], totalread);
 	Texture2D tex = LoadTextureFromImage(img);
 
-	//Texture2D tex = LoadTexture("assets/images/mudkip.png");
-	Sound yipee = LoadSound("assets/audio/yipee.mp3");
+	totalread = file.LoadData("assets/audio/yipee.mp3", buffers[1]);
+	Wave wav = LoadWaveFromMemory(".mp3", &buffers[1][0], totalread);
+	Sound yipee = LoadSoundFromWave(wav);
 
 	Rectangle rect{ 250,250,250,100 };
 
@@ -81,10 +64,6 @@ int main() {
 		nugget::nugAudio->PlayNoise(&yipee);
 	}
 
-	UnloadTexture(tex);
-	UnloadSound(yipee);
-
 	nugget::nugAudio->Shutdown();
 	nugget::nugRender->Shutdown();
-	nugget::nugResource->Shutdown();
 }

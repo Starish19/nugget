@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "AudioSystemRaylib.h"
 
 #ifdef AUDIOSYSTEM_RAYLIB

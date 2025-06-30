@@ -19,11 +19,8 @@
     <Filter Include="Header Files\Raylib">
       <UniqueIdentifier>{7d57b3e4-5c75-4f09-99b6-7df899e077aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\nugget">
-      <UniqueIdentifier>{8625781e-98c7-4771-becc-349f7a508bc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\nugget">
-      <UniqueIdentifier>{7c661cf5-5d5e-478c-bfd3-2224199ddbd3}</UniqueIdentifier>
+    <Filter Include="Header Files\abstractions">
+      <UniqueIdentifier>{a5922ee2-42fc-4b25-b29c-ed1119501a32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,37 +36,46 @@
     <ClCompile Include="InputSystemRaylib.cpp">
       <Filter>Source Files\Raylib</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceSystemNugget.cpp">
-      <Filter>Source Files\nugget</Filter>
+    <ClCompile Include="zipFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="subsystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RenderSystemRaylib.h">
       <Filter>Header Files\Raylib</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioSystem.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AudioSystemRaylib.h">
       <Filter>Header Files\Raylib</Filter>
     </ClInclude>
-    <ClInclude Include="InputSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputSystemRaylib.h">
       <Filter>Header Files\Raylib</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceSystem.h">
+    <ClInclude Include="zipFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceSystemNugget.h">
-      <Filter>Header Files\nugget</Filter>
+    <ClInclude Include="AudioSystem.h">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceSystem.h">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="subsystem.h">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file.h">
+      <Filter>Header Files\abstractions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

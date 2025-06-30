@@ -1,5 +1,5 @@
+#include "stdafx.h"
 #include "RenderSystemRaylib.h"
-
 
 #ifdef RENDERSYSTEM_RAYLIB
 	nugget::RenderSystemRaylib nugRenderSystemRaylib;

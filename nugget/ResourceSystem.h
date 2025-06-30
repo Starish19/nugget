@@ -1,38 +1,20 @@
 #pragma once
+#pragma once
 #include "subsystem.h"
 
 //Forward Declarations
-struct file;
+struct Image;
+struct Audio;
 
 namespace nugget {
-    struct Image {
-        char data[100000];
-        int location;
-        int length;
-    };
-
-    struct Audio {
-        char data[12000];
-        int location;
-        int length;
-    };
-
     class ResourceSystem : public nugget::subsystem {
     public:
-        void Shutdown() { delete imagePool; delete audioPool; }
+        virtual Image* LoadImage(char* filePath) = 0;
+        virtual Audio* LoadAudio(char* filePath) = 0;
 
-        virtual Image LoadImage(file handle, char* path);
-        virtual Audio LoadAudio();
-
-        virtual Image getImage();
-        virtual Audio getAudio();
-
-        virtual void setImagePool(Image* pool) {imagePool = pool;}
-        virtual void setAudioPool(Audio* pool) {audioPool = pool;}
-
+        virtual Image* getImage(char* name) = 0;
+        virtual Audio* getAudio(char* name) = 0;
     protected:
-        Image* imagePool;
-        Audio* audioPool;
     };
 
     extern ResourceSystem* nugResource;
