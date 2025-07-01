@@ -22,6 +22,12 @@
     <Filter Include="Header Files\abstractions">
       <UniqueIdentifier>{a5922ee2-42fc-4b25-b29c-ed1119501a32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\unZip">
+      <UniqueIdentifier>{ab43d506-248b-422b-a884-598dd15b893a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\unZip">
+      <UniqueIdentifier>{d62de93a-cbda-4c8a-a422-f2e1cdad2767}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,11 +42,14 @@
     <ClCompile Include="InputSystemRaylib.cpp">
       <Filter>Source Files\Raylib</Filter>
     </ClCompile>
-    <ClCompile Include="zipFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceSystemRaylib.cpp">
+      <Filter>Source Files\Raylib</Filter>
+    </ClCompile>
+    <ClCompile Include="zipFile.cpp">
+      <Filter>Source Files\unZip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -52,9 +61,6 @@
     </ClInclude>
     <ClInclude Include="InputSystemRaylib.h">
       <Filter>Header Files\Raylib</Filter>
-    </ClInclude>
-    <ClInclude Include="zipFile.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AudioSystem.h">
       <Filter>Header Files\abstractions</Filter>
@@ -76,6 +82,12 @@
     </ClInclude>
     <ClInclude Include="file.h">
       <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceSystemRaylib.h">
+      <Filter>Header Files\Raylib</Filter>
+    </ClInclude>
+    <ClInclude Include="zipFile.h">
+      <Filter>Header Files\unZip</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

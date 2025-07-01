@@ -104,7 +104,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RENDERSYSTEM_RAYLIB;AUDIOSYSTEM_RAYLIB;INPUTSYSTEM_RAYLIB;RESOURCESYSTEMNUGGET;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RENDERSYSTEM_RAYLIB;AUDIOSYSTEM_RAYLIB;INPUTSYSTEM_RAYLIB;RESOURCESYSTEMRAYLIB;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)include\raylib;$(SolutionDir)include\minizip;$(SolutionDir)include\zlib;</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -135,6 +135,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AudioSystemRaylib.cpp" />
+    <ClCompile Include="ResourceSystemRaylib.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -150,6 +151,7 @@
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="AudioSystemRaylib.h" />
     <ClInclude Include="file.h" />
+    <ClInclude Include="ResourceSystemRaylib.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="zipFile.h" />
     <ClInclude Include="InputSystem.h" />

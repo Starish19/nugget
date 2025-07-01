@@ -2,7 +2,7 @@
 #include "RenderSystemRaylib.h"
 #include "AudioSystemRaylib.h"
 #include "InputSystemRaylib.h"
-#include "zipFile.h"
+#include "ResourceSystemRaylib.h"
 
 int main() {
 	nugget::nugRender->Initalize();
@@ -13,12 +13,13 @@ int main() {
 	SetMasterVolume(0.5);
 	SetTargetFPS(30);
 
-	nugget::zipFile file("assets.zip");
+	/*nugget::zipFile file("assets.zip");
 
 	const int size = 13000;
 	std::vector<std::vector<unsigned char>> buffers(2);
 	buffers[0].resize(size);
 	buffers[1].resize(size);
+
 
 	int totalread = file.LoadData("assets/images/mudkip.png", buffers[0]);
 	Image img = LoadImageFromMemory(".png", &buffers[0][0], totalread);
@@ -26,7 +27,18 @@ int main() {
 
 	totalread = file.LoadData("assets/audio/yipee.mp3", buffers[1]);
 	Wave wav = LoadWaveFromMemory(".mp3", &buffers[1][0], totalread);
-	Sound yipee = LoadSoundFromWave(wav);
+	Sound yipee = LoadSoundFromWave(wav);*/
+
+	nugget::nugResource->Initalize();
+	nugget::nugResource->addFile("images", "assets.zip");
+
+	nugget::nugResource->LoadImage("mudkip", "images", "assets/images/mudkip.png");
+	nugget::nugResource->LoadImage("argh", "images", "assets/images/th.jpg");
+	Image* img = nugget::nugResource->getImage("argh");
+	Texture2D tex = LoadTextureFromImage(*img);
+
+	Wave* wav = nugget::nugResource->LoadAudio("yippee", "images", "assets/audio/yipee.mp3");
+	Sound yipee = LoadSoundFromWave(*wav);
 
 	Rectangle rect{ 250,250,250,100 };
 
@@ -66,4 +78,5 @@ int main() {
 
 	nugget::nugAudio->Shutdown();
 	nugget::nugRender->Shutdown();
+	nugget::nugResource->Shutdown();
 }

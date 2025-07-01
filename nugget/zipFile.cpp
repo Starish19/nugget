@@ -3,13 +3,18 @@
 
 nugget::zipFile::zipFile(const std::string& handle) {
 	zipHandle = unzOpen64(handle.c_str());
+	int result = unzOpenCurrentFile(zipHandle);
+	if (result == UNZ_OK) m_isInitalized = true;
 }
 
 nugget::zipFile::~zipFile() {
-	unzClose(zipHandle);
+
 }
 
 int nugget::zipFile::LoadData(const std::string& filePath, std::vector<unsigned char> &buffer) {
+
+	if (!m_isInitalized) {return 0;}
+
 	int result = unzLocateFile(zipHandle, filePath.c_str(), 1);
 	int read, totalread = 0;
 
