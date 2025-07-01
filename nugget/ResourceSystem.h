@@ -22,7 +22,7 @@ namespace nugget {
         std::unordered_map<std::string, Image> imgs;
         std::unordered_map<std::string, Wave> wavs;
 
-        std::unordered_map<std::string, file> files;
+        std::unordered_map<std::string, std::unique_ptr<file>> files;
     };
 
     extern ResourceSystem* nugResource;

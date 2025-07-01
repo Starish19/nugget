@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c7818992-1776-43e4-bfaf-d4bdfac676b4}</ProjectGuid>
-    <RootNamespace>nugget</RootNamespace>
+    <ProjectGuid>{db41c84b-8522-416e-8286-ac388dc2bb60}</ProjectGuid>
+    <RootNamespace>Tetris</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -76,7 +76,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -91,7 +90,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,16 +102,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RENDERSYSTEM_RAYLIB;AUDIOSYSTEM_RAYLIB;INPUTSYSTEM_RAYLIB;RESOURCESYSTEMRAYLIB;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\raylib;$(SolutionDir)include\minizip;$(SolutionDir)include\zlib;</AdditionalIncludeDirectories>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(SolutionDir)include\nugget;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\raylib;$(SolutionDir)lib\minizip;$(SolutionDir)lib\zlib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstatic.lib;minizip.lib;raylib.lib;winmm.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib/nugget;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>nugget.lib;$(CoreLibraryDependencies);%(AdditionalDependencies);</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -124,7 +121,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,34 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AudioSystemRaylib.cpp" />
-    <ClCompile Include="ResourceSystemRaylib.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="zipFile.cpp" />
-    <ClCompile Include="InputSystemRaylib.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="RenderSystemRaylib.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AudioSystem.h" />
-    <ClInclude Include="AudioSystemRaylib.h" />
-    <ClInclude Include="file.h" />
-    <ClInclude Include="BaseComponent.h" />
-    <ClInclude Include="BaseGameObject.h" />
-    <ClInclude Include="ResourceSystemRaylib.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="zipFile.h" />
-    <ClInclude Include="InputSystem.h" />
-    <ClInclude Include="InputSystemRaylib.h" />
-    <ClInclude Include="RenderSystem.h" />
-    <ClInclude Include="RenderSystemRaylib.h" />
-    <ClInclude Include="ResourceSystem.h" />
-    <ClInclude Include="subsystem.h" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

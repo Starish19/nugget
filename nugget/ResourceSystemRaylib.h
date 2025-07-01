@@ -18,6 +18,5 @@ namespace nugget {
 		Image* getImage(const std::string& name) final;
 		Wave* getAudio(const std::string& name) final;
 	private:
-		std::unordered_map<std::string, zipFile> files;
 	};
 }

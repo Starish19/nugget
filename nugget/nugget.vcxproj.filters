@@ -89,5 +89,11 @@
     <ClInclude Include="zipFile.h">
       <Filter>Header Files\unZip</Filter>
     </ClInclude>
+    <ClInclude Include="BaseGameObject.h">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseComponent.h">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

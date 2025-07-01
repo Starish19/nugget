@@ -12,19 +12,19 @@ void nugget::ResourceSystemRaylib::Initalize() {
 
 void nugget::ResourceSystemRaylib::Shutdown() {
 	for (auto& file : files) {
-		file.second.closeFile();
+		file.second->closeFile();
 	}
 }
 
 void nugget::ResourceSystemRaylib::addFile(const std::string& fileName, const std::string& filePath) {
-	zipFile newFile(filePath);
+	std::unique_ptr<zipFile> newFile = std::make_unique<zipFile>(filePath);
 	files[fileName] = std::move(newFile);
 }
 
 Image* nugget::ResourceSystemRaylib::LoadImage(const std::string& name, const std::string& handle, const std::string& filePath) {
 	std::vector<unsigned char> buffer(80000);
 
-	file* file = &files.at(handle);
+	file* file = files[handle].get();
 
 	int totalread = file->LoadData(filePath.c_str(), buffer);
 	Image img = LoadImageFromMemory(".png", &buffer[0], totalread);
@@ -36,7 +36,7 @@ Image* nugget::ResourceSystemRaylib::LoadImage(const std::string& name, const st
 Wave* nugget::ResourceSystemRaylib::LoadAudio(const std::string& name, const std::string& handle, const std::string& filePath) {
 	std::vector<unsigned char> buffer(6000);
 
-	file* file = &files[handle];
+	file* file = files[handle].get();
 
 	int totalread = file->LoadData(filePath.c_str(), buffer);
 	Wave wav = LoadWaveFromMemory(".mp3", &buffer[0], totalread);

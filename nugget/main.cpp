@@ -34,13 +34,14 @@ int main() {
 
 	nugget::nugResource->LoadImage("mudkip", "images", "assets/images/mudkip.png");
 	nugget::nugResource->LoadImage("argh", "images", "assets/images/th.jpg");
-	Image* img = nugget::nugResource->getImage("argh");
+	nugget::nugResource->LoadImage("red", "images", "assets/images/RedRubix.png");
+	Image* img = nugget::nugResource->getImage("red");
 	Texture2D tex = LoadTextureFromImage(*img);
 
 	Wave* wav = nugget::nugResource->LoadAudio("yippee", "images", "assets/audio/yipee.mp3");
 	Sound yipee = LoadSoundFromWave(*wav);
 
-	Rectangle rect{ 250,250,250,100 };
+	Rectangle rect{ 250,250,50,50 };
 
 	while (!WindowShouldClose()) {
 

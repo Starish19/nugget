@@ -51,7 +51,7 @@ void nugget::RenderSystemRaylib::Clear(Color color) {
 }
 
 void nugget::RenderSystemRaylib::DrawRect(Texture2D* texture, Rectangle* rect) {
-	SetShapesTexture(*texture, Rectangle{ 0,0, (float)texture->width, (float)texture->height });
+	SetShapesTexture(*texture, Rectangle{0, 0, (float)texture->width, (float)texture->height });
 	DrawRectangleRec(*rect, WHITE);
 }
 
