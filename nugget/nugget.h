@@ -5,3 +5,6 @@
 #include "InputSystem.h"
 #include "ResourceSystem.h"
 #include "NuggetApplicazione.h"
+#include "BaseComponent.h"
+#include "BaseGameObject.h"
+#include "Components.h"

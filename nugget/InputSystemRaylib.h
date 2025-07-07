@@ -14,7 +14,8 @@ namespace nugget {
         void Shutdown() final;
 
         bool KeyPressed(int key) final;
-        void KeyList(int* keys) final;
+        void KeyList(std::vector<int> &keys) final;
+        void KeyList(std::unordered_map<int, bool> &keys) final;
 
         bool MousePressed(int button) final;
         Vector2 MousePos() final;

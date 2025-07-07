@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="AudioSystemRaylib.h" />
+    <ClInclude Include="Components.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="BaseGameObject.h" />

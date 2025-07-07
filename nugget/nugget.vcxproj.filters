@@ -89,9 +89,6 @@
     <ClInclude Include="zipFile.h">
       <Filter>Header Files\unZip</Filter>
     </ClInclude>
-    <ClInclude Include="BaseGameObject.h">
-      <Filter>Header Files\abstractions</Filter>
-    </ClInclude>
     <ClInclude Include="BaseComponent.h">
       <Filter>Header Files\abstractions</Filter>
     </ClInclude>
@@ -99,6 +96,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="nugget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseGameObject.h">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="Components.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

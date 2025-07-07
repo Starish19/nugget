@@ -43,7 +43,7 @@ int main() {
 
 	while (!WindowShouldClose()) {
 
-		int keys[5] = { KEY_A, KEY_W, KEY_S, KEY_D, KEY_NULL };
+		std::vector<int> keys = { KEY_A, KEY_W, KEY_S, KEY_D, KEY_NULL };
 		nugget::nugInput->KeyList(keys);
 
 		for (int key : keys) {

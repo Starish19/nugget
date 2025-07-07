@@ -1,18 +1,19 @@
 #pragma once
 
+namespace nugget {
 //Forward Declarations
 class GameObject;
 
-namespace nugget {
-	class Component {
+	struct Component {
 	public:
-		Component(GameObject* g) : m_GameObject(g) {}
+		Component() {}
+		Component(nugget::GameObject* g) : m_GameObject(g) {}
 		virtual ~Component() {}
 
 		virtual void Start() = 0;
-		virtual void Update() = 0;
+		virtual void Update(float dt) = 0;
 
 	private:
-		GameObject* m_GameObject;
+		const GameObject* m_GameObject;
 	};
 }

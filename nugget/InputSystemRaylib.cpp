@@ -26,11 +26,26 @@ bool nugget::InputSystemRaylib::KeyPressed(int key) {
 	return IsKeyPressed(key);
 }
 
-void nugget::InputSystemRaylib::KeyList(int* keys) {
-	for (int i = 0; keys[i]; i++) {
-		if (IsKeyUp(keys[i])) {
-			keys[i] = 0;
+void nugget::InputSystemRaylib::KeyList(std::vector<int> &keys) {
+	bool afk = true;
+	for (int i = 0; i < keys.size(); i++) {
+		if (!IsKeyDown(keys[i]))
+			keys[i] = -1;
+		else
+			afk = false;
+	}
+	if (afk) keys[0] = KEY_NULL;
+}
+
+void nugget::InputSystemRaylib::KeyList(std::unordered_map<int, bool> &keys) {
+	keys[KEY_NULL] = true;
+	for (auto i = keys.begin(); i != keys.end(); i++) {
+		if (IsKeyDown(i->first)) {
+			i->second = true;
+			keys[KEY_NULL] = false;
 		}
+		else
+			i->second = false;
 	}
 }
 

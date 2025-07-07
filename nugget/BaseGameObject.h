@@ -2,7 +2,7 @@
 #include "stdafx.h"
 
 //Forward Declarations
-class Component;
+struct Component;
 
 namespace nugget {
 	class GameObject {
