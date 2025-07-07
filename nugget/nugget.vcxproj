@@ -112,8 +112,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\raylib;$(SolutionDir)lib\minizip;$(SolutionDir)lib\zlib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstatic.lib;minizip.lib;raylib.lib;winmm.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\raylib;$(SolutionDir)lib\minizip;$(SolutionDir)lib\zlib;$(SolutionDir)lib\Tetris;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>zlibstatic.lib;minizip.lib;raylib.lib;winmm.lib;Tetris.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -153,6 +153,8 @@
     <ClInclude Include="file.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="BaseGameObject.h" />
+    <ClInclude Include="nugget.h" />
+    <ClInclude Include="NuggetApplicazione.h" />
     <ClInclude Include="ResourceSystemRaylib.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="zipFile.h" />

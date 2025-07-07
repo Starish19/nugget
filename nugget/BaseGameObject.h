@@ -7,10 +7,8 @@ class Component;
 namespace nugget {
 	class GameObject {
 	public:
-		virtual void Start() {};
-		virtual void Input() {};
-		virtual void Update(float dt) {};
-		virtual void Render() {};
+		virtual void Start() = 0;
+		virtual void Update(float dt) = 0;
 
 		template <class C>
 		C* addComponent() {

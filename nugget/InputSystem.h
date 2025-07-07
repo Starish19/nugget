@@ -3,6 +3,7 @@
 
 //Forward Declarations
 struct Vector2;
+enum KeyboardKey : int;
 
 namespace nugget {
 	//Abstract Input System

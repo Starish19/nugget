@@ -1,8 +1,6 @@
 #include "stdafx.h"
-#include "RenderSystemRaylib.h"
-#include "AudioSystemRaylib.h"
-#include "InputSystemRaylib.h"
-#include "ResourceSystemRaylib.h"
+#include "nugget.h"
+#include "raylib.h"
 
 int main() {
 	nugget::nugRender->Initalize();
@@ -63,6 +61,8 @@ int main() {
 				break;
 			}
 		}
+
+		nugget::nugApp->Update(GetFrameTime());
 
 		nugget::nugRender->StartDrawing();
 		nugget::nugRender->Clear(BLUE);

@@ -95,5 +95,11 @@
     <ClInclude Include="BaseComponent.h">
       <Filter>Header Files\abstractions</Filter>
     </ClInclude>
+    <ClInclude Include="NuggetApplicazione.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nugget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
