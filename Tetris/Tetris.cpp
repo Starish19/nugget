@@ -1,12 +1,21 @@
 #include "nugget.h"
 #include "Tetris.h"
+#include "Block.h"
 #include <iostream>
 
 Tetris TetrisApp;
 nugget::NuggetApplicazione* nugget::nugApp = &TetrisApp;
 
 void Tetris::Start() {
+	std::unique_ptr<Block>first_block = std::make_unique<Block>();
+	m_objects["firstBlock"] = std::move(first_block);
 
+	first_block = std::make_unique<Block>();
+	m_objects["secondBlock"] = std::move(first_block);
+
+	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
+		it->second->Start();
+	}
 }
 
 void Tetris::Update(float dt) {
@@ -16,34 +25,12 @@ void Tetris::Update(float dt) {
 	}
 
 	std::cout << "Updates " << dt << std::endl;
-
-	std::vector<int> keys = {nugget::KEY_A, nugget::KEY_W, nugget::KEY_S, nugget::KEY_D};
-	
-	nugget::nugInput->KeyList(keys);
-	for (int key : keys) {
-		switch (key)
-		{
-		case nugget::KEY_A:
-			std::cout << "A" << std::endl;
-			break;
-		case nugget::KEY_D:
-			std::cout << "D" << std::endl;
-			break;
-		case nugget::KEY_W:
-			std::cout << "W" << std::endl;
-			break;
-		case nugget::KEY_S:
-			std::cout << "S" << std::endl;
-			break;
-		case nugget::KEY_NULL:
-			std::cout << "none" << std::endl;
-			break;
-		default:
-			break;
-		}
-	}
 }
 
 void Tetris::Render() {
-	
+	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
+		if (auto renderable = it->second->getComponent<nugget::Renderable>()) {
+			renderable->Render();
+		}
+	}
 }

@@ -13,10 +13,13 @@ namespace nugget {
 		void addFile(const std::string& fileName, const std::string& filePath) final;
 
 		Image* LoadImage(const std::string& name, const std::string& handle, const std::string& filePath) final;
-		Wave* LoadAudio(const std::string& name, const std::string& handle, const std::string& filePath) final;
+		Wave* LoadWave(const std::string& name, const std::string& handle, const std::string& filePath) final;
 
 		Image* getImage(const std::string& name) final;
-		Wave* getAudio(const std::string& name) final;
+		Wave* getWave(const std::string& name) final;
+
+		Texture getTextureFromImage(const std::string& name) final;
+		Sound getSoundFromWave(const std::string& name) final;
 	private:
 	};
 }

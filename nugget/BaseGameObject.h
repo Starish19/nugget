@@ -1,30 +1,29 @@
 #pragma once
 #include "stdafx.h"
-
-//Forward Declarations
-struct Component;
+#include "BaseComponent.h"
 
 namespace nugget {
 	class GameObject {
 	public:
-		virtual void Start() = 0;
-		virtual void Update(float dt) = 0;
+		virtual void Start() {for (auto& c : m_ComponentList) c->Start(); }
+		virtual void Update(float dt) {for (auto& c : m_ComponentList) c->Update(dt); }
 
 		template <class C>
 		C* addComponent() {
 			std::unique_ptr<C> ptr = std::make_unique<C>(this);
+			C* p = ptr.get();
 			m_ComponentList.push_back(std::move(ptr));
-			return ptr.get();
+			return p;
 		}
 
 		template <class C>
 		C* getComponent() {
-			const std::type_info getType = typeid(C);
+			const std::type_info& getType = typeid(C);
 
 			for (auto& c : m_ComponentList) {
-				const std::type_info thisType = typeid(*c);
+				const std::type_info& thisType = typeid(*c);
 				if (getType == thisType) {
-					return static_cast<C>(c.get());
+					return static_cast<C*>(c.get());
 				}
 			}
 			return nullptr;

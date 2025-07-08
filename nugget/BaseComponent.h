@@ -1,8 +1,8 @@
 #pragma once
 
 namespace nugget {
-//Forward Declarations
-class GameObject;
+	//Forward Declarations
+	class GameObject;
 
 	struct Component {
 	public:

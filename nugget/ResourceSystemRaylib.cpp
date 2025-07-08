@@ -33,7 +33,7 @@ Image* nugget::ResourceSystemRaylib::LoadImage(const std::string& name, const st
 	return &img;
 }
 
-Wave* nugget::ResourceSystemRaylib::LoadAudio(const std::string& name, const std::string& handle, const std::string& filePath) {
+Wave* nugget::ResourceSystemRaylib::LoadWave(const std::string& name, const std::string& handle, const std::string& filePath) {
 	std::vector<unsigned char> buffer(6000);
 
 	file* file = files[handle].get();
@@ -49,6 +49,14 @@ Image* nugget::ResourceSystemRaylib::getImage(const std::string& name) {
 	return &imgs.at(name);
 }
 
-Wave* nugget::ResourceSystemRaylib::getAudio(const std::string& name) {
+Wave* nugget::ResourceSystemRaylib::getWave(const std::string& name) {
 	return &wavs.at(name);
+}
+
+Texture nugget::ResourceSystemRaylib::getTextureFromImage(const std::string& name) {
+	return LoadTextureFromImage(imgs.at(name));
+}
+
+Sound nugget::ResourceSystemRaylib::getSoundFromWave(const std::string& name) {
+	return LoadSoundFromWave(wavs.at(name));
 }
