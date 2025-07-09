@@ -38,15 +38,16 @@ void nugget::InputSystemRaylib::KeyList(std::vector<int> &keys) {
 }
 
 void nugget::InputSystemRaylib::KeyList(std::unordered_map<int, bool> &keys) {
-	keys[KEY_NULL] = true;
+	bool afk = true;
 	for (auto i = keys.begin(); i != keys.end(); i++) {
 		if (IsKeyDown(i->first)) {
 			i->second = true;
-			keys[KEY_NULL] = false;
+			afk = false;
 		}
-		else
+		else 
 			i->second = false;
 	}
+	keys[KEY_NULL] = afk;
 }
 
 bool nugget::InputSystemRaylib::MousePressed(int button) {

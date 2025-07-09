@@ -53,10 +53,14 @@ Wave* nugget::ResourceSystemRaylib::getWave(const std::string& name) {
 	return &wavs.at(name);
 }
 
-Texture nugget::ResourceSystemRaylib::getTextureFromImage(const std::string& name) {
-	return LoadTextureFromImage(imgs.at(name));
+Texture* nugget::ResourceSystemRaylib::getTextureFromImage(const std::string& name) {
+	if (texs.find(name) == texs.end())
+		texs[name] = LoadTextureFromImage(imgs[name]);
+	return &texs[name];
 }
 
-Sound nugget::ResourceSystemRaylib::getSoundFromWave(const std::string& name) {
-	return LoadSoundFromWave(wavs.at(name));
+Sound* nugget::ResourceSystemRaylib::getSoundFromWave(const std::string& name) {
+	if (snds.find(name) == snds.end())
+		snds[name] = LoadSoundFromWave(wavs.at(name));
+	return &snds[name];
 }

@@ -18,8 +18,7 @@ namespace nugget {
 		Image* getImage(const std::string& name) final;
 		Wave* getWave(const std::string& name) final;
 
-		Texture getTextureFromImage(const std::string& name) final;
-		Sound getSoundFromWave(const std::string& name) final;
-	private:
+		Texture* getTextureFromImage(const std::string& name) final;
+		Sound* getSoundFromWave(const std::string& name) final;
 	};
 }

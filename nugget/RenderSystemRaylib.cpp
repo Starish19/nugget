@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "RenderSystemRaylib.h"
+#include "Components.h"
 
 #ifdef RENDERSYSTEM_RAYLIB
 	nugget::RenderSystemRaylib nugRenderSystemRaylib;
@@ -30,6 +31,10 @@ void nugget::RenderSystemRaylib::setWindowParams(int width, int height, const ch
 	SetWindowTitle(title);
 }
 
+void nugget::RenderSystemRaylib::setClear(Color color) {
+	Clear = color;
+}
+
 int nugget::RenderSystemRaylib::getWidth() {
 	return win_width;
 }
@@ -40,17 +45,19 @@ int nugget::RenderSystemRaylib::getHeight() {
 
 void nugget::RenderSystemRaylib::StartDrawing() {
 	BeginDrawing();
+	ClearBackground(Clear);
+
 }
 
 void nugget::RenderSystemRaylib::FinishDrawing() {
 	EndDrawing();
 }
 
-void nugget::RenderSystemRaylib::Clear(Color color) {
-	ClearBackground(color);
+void nugget::RenderSystemRaylib::Draw(Texture2D* texture, int posX, int posY) {
+	DrawTexture(*texture, posX, posY, WHITE);
 }
 
-void nugget::RenderSystemRaylib::DrawRect(Texture2D* texture, Rectangle* rect) {
+void nugget::RenderSystemRaylib::Draw(Texture2D* texture, Rectangle* rect) {
 	SetShapesTexture(*texture, Rectangle{0, 0, (float)texture->width, (float)texture->height });
 	DrawRectangleRec(*rect, WHITE);
 }

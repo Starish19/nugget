@@ -21,11 +21,13 @@ namespace nugget {
         virtual Image* getImage(const std::string& name) = 0;
         virtual Wave* getWave(const std::string& name) = 0;
 
-        virtual Texture getTextureFromImage(const std::string& name) = 0;
-        virtual Sound getSoundFromWave(const std::string& name) = 0;
+        virtual Texture* getTextureFromImage(const std::string& name) = 0;
+        virtual Sound* getSoundFromWave(const std::string& name) = 0;
     protected:
         std::unordered_map<std::string, Image> imgs;
+        std::unordered_map<std::string, Texture> texs;
         std::unordered_map<std::string, Wave> wavs;
+        std::unordered_map<std::string, Sound> snds;
 
         std::unordered_map<std::string, std::unique_ptr<file>> files;
     };
