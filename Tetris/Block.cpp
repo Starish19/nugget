@@ -27,7 +27,7 @@ void Block::Start() {
 		renderComp->setRect(nugget::Y, renderComp->getRect(nugget::Y) + 25);
 		}, 1);
 	timeComp->addTrigger([=]() {
-		std::vector<int> keys = inputComp->getKeys();
+		std::vector<int> keys =  inputComp->getKeys();
 		for (int key : keys) {
 			switch (key)
 			{
@@ -49,25 +49,4 @@ void Block::Start() {
 void Block::Update(float dt) {
 	nugget::GameObject::Update(dt);
 
-	/*if (auto render = getComponent<nugget::renderComponent_Rect>()) {
-
-		if (auto inputs = getComponent<nugget::inputComponent>()) {
-			std::vector<int>keys = inputs->getKeys();
-			for (int key : keys) {
-				switch (key)
-				{
-				case nugget::KEY_A:
-					render->setRect(nugget::X, render->getRect(nugget::X) - 100 * dt);
-					break;
-				case nugget::KEY_D:
-					render->setRect(nugget::X, render->getRect(nugget::X) + 100 * dt);
-					break;
-				case nugget::KEY_NULL:
-					break;
-				default:
-					break;
-				}
-			}
-		}
-	}*/
 }

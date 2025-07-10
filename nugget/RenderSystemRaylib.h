@@ -23,7 +23,7 @@ namespace nugget {
 
 		void Draw(Texture2D* texture, int posX, int posY) final;
 		void Draw(Texture2D* texture, Rectangle* rect) final;
-		void Text(const char* text, int pos_x, int pos_y, int font_size, Color color) final;
+		void Text(const char* text, int pos_x, int pos_y, int font_size, Color* color) final;
 	private:
 		Color Clear;
 	};

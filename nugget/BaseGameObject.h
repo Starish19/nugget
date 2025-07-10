@@ -29,6 +29,15 @@ namespace nugget {
 			return nullptr;
 		}
 
+		template <class C>
+		C* getSubComponent() {
+			for (auto& c : m_ComponentList) {
+				if (dynamic_cast<C*>(c.get()) != nullptr) {
+					return static_cast<C*>(c.get());
+				}
+			}
+		}
+
 		std::vector<std::unique_ptr<Component>> m_ComponentList;
 	};
 

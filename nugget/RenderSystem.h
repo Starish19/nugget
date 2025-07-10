@@ -23,7 +23,7 @@ namespace nugget {
 
 		virtual void Draw(Texture* texture, int posX, int posY) = 0;
 		virtual void Draw(Texture* texture, Rectangle* dimensions) = 0; //Draw Rectangle
-		virtual void Text(const char* text, int pos_x, int pos_y, int font_size, Color color) = 0; //Write text at position
+		virtual void Text(const char* text, int pos_x, int pos_y, int font_size, Color* color) = 0; //Write text at position
 	protected:
 		int win_width;
 		int win_height;

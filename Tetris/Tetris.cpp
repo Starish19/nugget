@@ -10,15 +10,21 @@ void Tetris::Start() {
 	std::unique_ptr<Block>first_block = std::make_unique<Block>();
 	m_objects["firstBlock"] = std::move(first_block);
 
-	nugget::nugResource->addFile("images", "assets.zip");
+	nugget::nugResource->addFile("assets", "assets.zip");
 
-	nugget::nugResource->LoadImage("mudkip", "images", "assets/images/mudkip.png");
-	nugget::nugResource->LoadImage("argh", "images", "assets/images/th.jpg");
-	nugget::nugResource->LoadImage("red", "images", "assets/images/RedRubix.png");
-	nugget::nugResource->LoadImage("test", "images", "assets/images/test.png");
+	nugget::nugResource->LoadImage("mudkip", "assets", "assets/images/mudkip.png");
+	nugget::nugResource->LoadImage("argh", "assets", "assets/images/th.jpg");
+	nugget::nugResource->LoadImage("red", "assets", "assets/images/RedRubix.png");
+	nugget::nugResource->LoadImage("test", "assets", "assets/images/test.png");
 
-	nugget::nugResource->LoadWave("yipee", "images", "assets/audio/yipee.mp3");
+	nugget::nugResource->LoadWave("yipee", "assets", "assets/audio/yipee.mp3");
 	nugget::nugResource->getSoundFromWave("yipee");
+
+	std::unique_ptr<nugget::GameObject> text = std::make_unique<nugget::GameObject>();
+	m_objects["Hello"] = std::move(text);
+
+	auto textComp = m_objects["Hello"]->addComponent<nugget::renderComponent_Text>();
+	textComp->setText("Hello World");
 
 	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
 		it->second->Start();
@@ -36,7 +42,7 @@ void Tetris::Update(float dt) {
 
 void Tetris::Render() {
 	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
-		if (auto renderable = it->second->getComponent<nugget::renderComponent_Rect>()) {
+		if (auto renderable = it->second->getSubComponent<nugget::Renderable>()) {
 			renderable->Render();
 		}
 	}

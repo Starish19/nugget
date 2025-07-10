@@ -39,26 +39,42 @@ namespace nugget{
 	typedef enum {X,Y,WIDTH,HEIGHT}RectValue;
 
 	struct renderComponent_Rect : public Renderable {
-		renderComponent_Rect(GameObject* g) : Renderable(g) {setRect(0,0,0,0);}
+		renderComponent_Rect(GameObject* g);
 		~renderComponent_Rect() {
 			delete rect;
 		}
 
-		void Start() override {}
+		void Start() override {};
 		void Update(float dt) override {}
-		void Render() override {nugRender->Draw(tex, rect); }
+		void Render() override {if (tex) nugRender->Draw(tex, rect); }
 
 		virtual void setTexture(const std::string img_id) {
 			tex = nugResource->getTextureFromImage(img_id);
 		}
 
-		virtual void setRect(float x, float y, float width, float height);
+		virtual void setRect(float x = 0, float y = 0, float width = 50, float height = 50);
 		virtual void setRect(RectValue item, float value);
 		virtual float getRect(RectValue item);
 
 	private:
 		Texture* tex = nullptr;
 		Rectangle* rect = nullptr;
+	};
+
+	struct renderComponent_Text : public Renderable {
+		renderComponent_Text(GameObject* g);
+		~renderComponent_Text() {}
+
+		void Start() override {}
+		void Update(float dt) override {}
+		void Render() override { nugRender->Text(text.c_str(), 50, 50, 50, color);}
+
+		void setText(std::string t) {text = t;}
+		void setColor(int r = 0, int g = 0, int b = 0, int a = 100);
+
+	private:
+		std::string text;
+		Color* color;
 	};
 
 	struct audioComponent : public Component {
@@ -68,7 +84,7 @@ namespace nugget{
 		void Start() override {}
 		void Update(float dt) override {nugAudio->PlayNoise(snd);}
 
-		void SetSound(const std::string snd_id) {
+		virtual void SetSound(const std::string snd_id) {
 			snd = nugResource->getSoundFromWave(snd_id);
 		}
 
@@ -85,13 +101,13 @@ namespace nugget{
 			totalTime += dt;
 			for (int i = 0; i < delays.size() && i < events.size(); i++) {
 				if (totalTime > delays[i]) {
-					delays[i] += init_delays[i];
+					delays[i] = totalTime + init_delays[i];
 					events[i]();
 				}
 			}
 		}
 
-		void addTrigger(std::function<void()> event, float delay) {
+		virtual void addTrigger(std::function<void()> event, float delay) {
 			events.push_back(event);
 			delays.push_back(delay);
 		}
