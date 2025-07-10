@@ -4,6 +4,7 @@
 #include "RenderSystem.h"
 #include "ResourceSystem.h"
 #include "AudioSystem.h"
+#include "grid.h"
 
 namespace nugget{
 	struct inputComponent : public Component {
@@ -24,6 +25,10 @@ namespace nugget{
 				if (k->second) activeKeys.push_back(k->first);
 			}
 			return activeKeys;
+		}
+
+		bool getKey(int key) {
+			return nugInput->KeyPressed(key);
 		}
 
 	private:
@@ -75,6 +80,38 @@ namespace nugget{
 	private:
 		std::string text;
 		Color* color;
+	};
+
+	struct renderComponent_Grid : public Renderable {
+		renderComponent_Grid(GameObject* g) : Renderable(g) {}
+		~renderComponent_Grid() {}
+
+		void Start() override;
+		void Update(float dt) override {
+			if (m_grid) pos = m_grid->getCellPosition(m_row, m_column);
+		}
+		void Render() override {
+			if (tex) nugRender->Draw(tex, pos.posX, pos.posY);
+		}
+
+		virtual void setTexture(const std::string img_id) {
+			tex = nugResource->getTextureFromImage(img_id);
+		}
+
+		void setGrid(grid* g) {m_grid = g;};
+
+		void Rotate90(coords rotateAround) {
+			coords newPos =  m_grid->rotate90({ m_row, m_column }, rotateAround);
+			m_row = newPos.posX;
+			m_column = newPos.posY;
+		}
+
+		int m_row = 5;
+		int m_column = 0;
+	private:
+		Texture* tex = nullptr;
+		coords pos{0,0};
+		grid* m_grid = nullptr;
 	};
 
 	struct audioComponent : public Component {

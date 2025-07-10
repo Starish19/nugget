@@ -7,7 +7,7 @@ Tetris TetrisApp;
 nugget::NuggetApplicazione* nugget::nugApp = &TetrisApp;
 
 void Tetris::Start() {
-	std::unique_ptr<Block>first_block = std::make_unique<Block>();
+	std::unique_ptr<Block>first_block = std::make_unique<Block>(&map);
 	m_objects["firstBlock"] = std::move(first_block);
 
 	nugget::nugResource->addFile("assets", "assets.zip");
@@ -24,7 +24,7 @@ void Tetris::Start() {
 	m_objects["Hello"] = std::move(text);
 
 	auto textComp = m_objects["Hello"]->addComponent<nugget::renderComponent_Text>();
-	textComp->setText("Hello World");
+	textComp->setText("Tetris");
 
 	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
 		it->second->Start();

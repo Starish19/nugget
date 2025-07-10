@@ -60,6 +60,7 @@ void nugget::RenderSystemRaylib::Draw(Texture2D* texture, int posX, int posY) {
 void nugget::RenderSystemRaylib::Draw(Texture2D* texture, Rectangle* rect) {
 	SetShapesTexture(*texture, Rectangle{0, 0, (float)texture->width, (float)texture->height });
 	DrawRectangleRec(*rect, WHITE);
+	SetShapesTexture(Texture(), Rectangle());
 }
 
 void nugget::RenderSystemRaylib::Text(const char* text, int pos_x, int pos_y, int font_size, Color* color) {

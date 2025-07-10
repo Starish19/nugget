@@ -136,6 +136,7 @@
   <ItemGroup>
     <ClCompile Include="AudioSystemRaylib.cpp" />
     <ClCompile Include="Components.cpp" />
+    <ClCompile Include="grid.cpp" />
     <ClCompile Include="ResourceSystemRaylib.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -155,8 +156,10 @@
     <ClInclude Include="file.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="BaseGameObject.h" />
+    <ClInclude Include="grid.h" />
     <ClInclude Include="nugget.h" />
     <ClInclude Include="NuggetApplicazione.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceSystemRaylib.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="zipFile.h" />
@@ -166,6 +169,9 @@
     <ClInclude Include="RenderSystemRaylib.h" />
     <ClInclude Include="ResourceSystem.h" />
     <ClInclude Include="subsystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="nugget.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

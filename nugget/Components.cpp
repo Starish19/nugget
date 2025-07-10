@@ -60,3 +60,11 @@ nugget::renderComponent_Text::renderComponent_Text(GameObject* g) : Renderable(g
 void nugget::renderComponent_Text::setColor(int r, int g, int b, int a) {
 	*color = Color{unsigned char(r), unsigned char(g), unsigned char(b), unsigned char(a)};
 }
+
+void nugget::renderComponent_Grid::Start() {
+	if (m_grid) {
+		dimensions dims = m_grid->getCellDimensions();
+		tex->width = dims.width;
+		tex->height = dims.Height;
+	}
+}
