@@ -21,7 +21,7 @@
     <ClCompile Include="Block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="shape.cpp">
+    <ClCompile Include="BlockManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +32,10 @@
     <ClInclude Include="Block.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="shape.h">
+    <ClInclude Include="TetrisComp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TetrisComp.h">
+    <ClInclude Include="BlockManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

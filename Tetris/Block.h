@@ -1,5 +1,6 @@
 #pragma once
 #include "nugget.h"
+#include "BlockManager.h"
 
 class Block : public nugget::GameObject
 {
@@ -10,13 +11,8 @@ public:
 	void Start() override;
 	void Update(float dt) override;
 
-	void setPos(nugget::coords pos) {
-		m_origin = pos;
-	}
-
 protected:
 	nugget::grid* m_grid;
-	nugget::coords m_origin;
 	std::vector<nugget::coords> shape;
 };
 

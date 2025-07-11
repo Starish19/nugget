@@ -3,7 +3,6 @@
 
 Block::Block(nugget::grid* grid, nugget::coords origin) {
 	m_grid = grid;
-	m_origin = origin;
 }
 
 Block::~Block() {
@@ -21,9 +20,11 @@ void Block::Start() {
 	auto renderComp = addComponent<renderComponent_Grid_Shape>();
 	renderComp->setTexture("red");
 	renderComp->setGrid(m_grid);
-	renderComp->m_pos = m_origin;
-	renderComp->setShape(std::vector <nugget::coords>{{0, 0}, {1, 0}, {2, 0}, {0, 1}, {0, 2}});
+	renderComp->m_pos = {5,0};
+	renderComp->setShape(std::vector <nugget::coords>{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {1, -1}});
 	//m_grid->move(renderComp->m_pos);
+
+	BlockManager::conglomerate.push_back(nugget::coords{0,0});
 
 
 	//Audio Component
