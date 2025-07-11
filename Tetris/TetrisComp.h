@@ -17,9 +17,20 @@ struct renderComponent_Grid_Shape : public nugget::renderComponent_Grid{
 	}
 
 	void rotate90() {
-		for (nugget::coords pos : m_shape) {
+		for (nugget::coords& pos : m_shape) {
 			pos.rotate90({0,0});
 		}
+	}
+
+	void move(nugget::coords to) {
+		bool ok = true;
+		std::vector<nugget::coords> move;
+		for (nugget::coords pos : m_shape) {
+			if (ok = m_grid->attemptMove(m_pos + pos, to))
+				move.push_back(pos + to);
+			else return;
+		}
+		m_pos += to;
 	}
 
 protected:

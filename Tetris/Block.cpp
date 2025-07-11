@@ -1,7 +1,7 @@
 #include "Block.h"
 #include "TetrisComp.h"
 
-Block::Block(TetrisGrid* grid, nugget::coords origin) {
+Block::Block(nugget::grid* grid, nugget::coords origin) {
 	m_grid = grid;
 	m_origin = origin;
 }
@@ -35,9 +35,7 @@ void Block::Start() {
 	auto timeComp = addComponent<nugget::TimeKeep>();
 	//Move Down every second
 	timeComp->addTrigger([=]() {
-		renderComp->m_pos.posY += 1;
-		//if (m_grid->move(renderComp->m_pos))
-			//renderComp->m_pos.posY -= 1;
+		renderComp->move({ 0,1 });
 		}, 1);
 	//Move Left/right
 	timeComp->addTrigger([=]() {
@@ -46,14 +44,10 @@ void Block::Start() {
 			switch (key)
 			{
 			case nugget::KEY_A:
-				renderComp->m_pos.posX -= 1;
-				//if (m_grid->move(renderComp->m_pos)) 
-					//renderComp->m_pos.posX += 1;
+				renderComp->move({-1,0});
 				break;
 			case nugget::KEY_D:
-				renderComp->m_pos.posX += 1;
-				//if (m_grid->move(renderComp->m_pos))
-					//renderComp->m_pos.posX -= 1;
+				renderComp->move({1,0});
 				break;
 			default:
 				break;
@@ -68,13 +62,12 @@ void Block::Update(float dt) {
 	nugget::GameObject::Update(dt);
 
 	if (auto renderComp = getComponent<renderComponent_Grid_Shape>()) {
-		m_origin = renderComp->m_pos;
 		if (auto inputComp = getComponent<nugget::inputComponent>()) {
 			if (inputComp->getKey(nugget::KEY_R)) {
-				renderComp->m_pos.rotate90(renderComp->m_pos + m_origin);
+				renderComp->rotate90();
 			}
 			if (inputComp->getKey(nugget::KEY_S))
-				renderComp->m_pos.posY += 1;
+				renderComp->move({0,1});
 		}
 	}
 }

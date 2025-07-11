@@ -30,12 +30,6 @@ void Tetris::Start() {
 	auto textComp = m_objects["Hello"]->addComponent<nugget::renderComponent_Text>();
 	textComp->setText("Tetris");
 
-	auto TimeComp = m_objects["Hello"]->addComponent<nugget::TimeKeep>();
-	TimeComp->addTrigger([=]() {
-		system("cls");
-		map.print();
-		}, 0.4);
-
 	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
 		it->second->Start();
 	}

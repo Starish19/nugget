@@ -1,11 +1,10 @@
 #pragma once
-#include "TetrisGrid.h"
 #include "nugget.h"
 
 class Block : public nugget::GameObject
 {
 public:
-	Block(TetrisGrid* grid, nugget::coords origin);
+	Block(nugget::grid *grid, nugget::coords origin);
 	~Block();
 
 	void Start() override;
@@ -16,7 +15,7 @@ public:
 	}
 
 protected:
-	TetrisGrid* m_grid;
+	nugget::grid* m_grid;
 	nugget::coords m_origin;
 	std::vector<nugget::coords> shape;
 };

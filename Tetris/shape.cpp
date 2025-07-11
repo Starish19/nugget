@@ -1,6 +1,6 @@
 #include "shape.h"
 
-shape::shape(TetrisGrid* grid, nugget::coords origin, int color) : Block(grid, origin) {
+shape::shape(nugget::grid* grid, nugget::coords origin, int color) : Block(grid, origin) {
 
 }
 

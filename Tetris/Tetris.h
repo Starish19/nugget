@@ -1,5 +1,4 @@
 #pragma once
-#include "TetrisGrid.h"
 
 class Tetris : public nugget::NuggetApplicazione
 {
@@ -8,6 +7,6 @@ class Tetris : public nugget::NuggetApplicazione
 	void Render() final;
 
 private:
-	TetrisGrid map = TetrisGrid({50,50}, {25,25}, 10, 20);
+	nugget::grid map = nugget::grid({50,50}, {25,25}, 10, 10);
 };
 

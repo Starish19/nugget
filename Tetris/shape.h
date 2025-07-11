@@ -5,7 +5,7 @@
 class shape : public nugget::GameObject, public Block
 {
 public:
-	shape(TetrisGrid* grid, nugget::coords origin, int color);
+	shape(nugget::grid* grid, nugget::coords origin, int color);
 	~shape();
 
 	void Start() final;
