@@ -7,14 +7,18 @@ Tetris TetrisApp;
 nugget::NuggetApplicazione* nugget::nugApp = &TetrisApp;
 
 void Tetris::Start() {
-	std::unique_ptr<Block>first_block = std::make_unique<Block>(&map);
-	m_objects["firstBlock"] = std::move(first_block);
+	std::unique_ptr<Block> block = std::make_unique<Block>(&map, nugget::coords{3,3});
+	m_objects["Block_0_0"] = std::move(block);
 
 	nugget::nugResource->addFile("assets", "assets.zip");
 
 	nugget::nugResource->LoadImage("mudkip", "assets", "assets/images/mudkip.png");
 	nugget::nugResource->LoadImage("argh", "assets", "assets/images/th.jpg");
 	nugget::nugResource->LoadImage("red", "assets", "assets/images/RedRubix.png");
+	nugget::nugResource->LoadImage("blue", "assets", "assets/images/BlueRubix.png");
+	nugget::nugResource->LoadImage("green", "assets", "assets/images/GreenRubix.png");
+	nugget::nugResource->LoadImage("yellow", "assets", "assets/images/YellowRubix.png");
+	nugget::nugResource->LoadImage("purple", "assets", "assets/images/PurpleRubix.png");
 	nugget::nugResource->LoadImage("test", "assets", "assets/images/test.png");
 
 	nugget::nugResource->LoadWave("yipee", "assets", "assets/audio/yipee.mp3");
@@ -26,6 +30,12 @@ void Tetris::Start() {
 	auto textComp = m_objects["Hello"]->addComponent<nugget::renderComponent_Text>();
 	textComp->setText("Tetris");
 
+	auto TimeComp = m_objects["Hello"]->addComponent<nugget::TimeKeep>();
+	TimeComp->addTrigger([=]() {
+		system("cls");
+		map.print();
+		}, 0.4);
+
 	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
 		it->second->Start();
 	}
@@ -36,8 +46,6 @@ void Tetris::Update(float dt) {
 	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
 		it->second->Update(dt);
 	}
-
-	//std::cout << "Updates " << dt << std::endl;
 }
 
 void Tetris::Render() {

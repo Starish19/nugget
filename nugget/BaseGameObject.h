@@ -38,6 +38,7 @@ namespace nugget {
 			}
 		}
 
+	protected:
 		std::vector<std::unique_ptr<Component>> m_ComponentList;
 	};
 

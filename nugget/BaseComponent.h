@@ -13,7 +13,7 @@ namespace nugget {
 		virtual void Start() = 0;
 		virtual void Update(float dt) = 0;
 
-	private:
+	protected:
 		const GameObject* m_GameObject;
 	};
 }

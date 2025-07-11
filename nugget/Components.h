@@ -31,7 +31,7 @@ namespace nugget{
 			return nugInput->KeyPressed(key);
 		}
 
-	private:
+	protected:
 		std::unordered_map<int, bool> keys;
 	};
 
@@ -61,7 +61,7 @@ namespace nugget{
 		virtual void setRect(RectValue item, float value);
 		virtual float getRect(RectValue item);
 
-	private:
+	protected:
 		Texture* tex = nullptr;
 		Rectangle* rect = nullptr;
 	};
@@ -77,7 +77,7 @@ namespace nugget{
 		void setText(std::string t) {text = t;}
 		void setColor(int r = 0, int g = 0, int b = 0, int a = 100);
 
-	private:
+	protected:
 		std::string text;
 		Color* color;
 	};
@@ -88,10 +88,10 @@ namespace nugget{
 
 		void Start() override;
 		void Update(float dt) override {
-			if (m_grid) pos = m_grid->getCellPosition(m_row, m_column);
+			if (m_grid) screen_pos = m_grid->getCellPosition(m_pos.posX, m_pos.posY);
 		}
 		void Render() override {
-			if (tex) nugRender->Draw(tex, pos.posX, pos.posY);
+			if (tex) nugRender->Draw(tex, screen_pos.posX, screen_pos.posY);
 		}
 
 		virtual void setTexture(const std::string img_id) {
@@ -100,17 +100,10 @@ namespace nugget{
 
 		void setGrid(grid* g) {m_grid = g;};
 
-		void Rotate90(coords rotateAround) {
-			coords newPos =  m_grid->rotate90({ m_row, m_column }, rotateAround);
-			m_row = newPos.posX;
-			m_column = newPos.posY;
-		}
-
-		int m_row = 5;
-		int m_column = 0;
-	private:
+		coords m_pos{0,0};
+	protected:
 		Texture* tex = nullptr;
-		coords pos{0,0};
+		coords screen_pos{0,0};
 		grid* m_grid = nullptr;
 	};
 
@@ -125,7 +118,7 @@ namespace nugget{
 			snd = nugResource->getSoundFromWave(snd_id);
 		}
 
-	private:
+	protected:
 		Sound* snd = nullptr;
 	};
 
@@ -149,7 +142,7 @@ namespace nugget{
 			delays.push_back(delay);
 		}
 
-	private:
+	protected:
 		float totalTime = 0;
 		std::vector<std::function<void()>> events;
 		std::vector<float> delays;

@@ -10,6 +10,7 @@ namespace nugget {
 		virtual void Update(float dt) = 0;
 		virtual void Render() = 0;
 
+	protected:
 	std::unordered_map<std::string, std::unique_ptr<GameObject>> m_objects;
 	};
 

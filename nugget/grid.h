@@ -10,14 +10,21 @@ namespace nugget {
 			return coords{ posX - b.posX, posY - b.posY };
 		}
 		coords operator+(coords b) {
-			return  coords{ posX + b.posX, posY + b.posY };
+			return coords{ posX + b.posX, posY + b.posY };
 		}
 
-		coords invert() {
+		coords inverted() {
+			return {posY, posX};
+		}
+
+		void rotate90(coords rotateAround) {
+			*this = *this - rotateAround;
+
 			int temp = posX;
-			posX = posY * -1;
-			posY = temp * -1;
-			return (*this);
+			posX = -posY;
+			posY = temp;
+
+			*this = *this + rotateAround;
 		}
 	};
 
@@ -29,16 +36,14 @@ namespace nugget {
 	class grid
 	{
 	public:
-		grid(coords s, dimensions d, int r, int c) : start{c}, Width_Height{d}, rows(r), columns(c) {};
+		grid(coords s, dimensions d, int r, int c) : start{s}, Width_Height{d}, rows(r), columns(c) {};
 		~grid() {};
 
 		coords getCellPosition(int row, int column);
 		dimensions getGridDimensions();
 		dimensions getCellDimensions();
 
-		coords rotate90(coords currentPos, coords rotateAround);
-
-	private:
+	protected:
 		coords start;
 
 		dimensions Width_Height;

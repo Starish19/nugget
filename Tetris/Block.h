@@ -1,17 +1,23 @@
 #pragma once
-#include "BaseGameObject.h"
-#include "grid.h"
+#include "TetrisGrid.h"
+#include "nugget.h"
 
 class Block : public nugget::GameObject
 {
 public:
-	Block(nugget::grid* grid);
+	Block(TetrisGrid* grid, nugget::coords origin);
 	~Block();
 
-	void Start() final;
-	void Update(float dt) final ;
+	void Start() override;
+	void Update(float dt) override;
 
-private:
-	nugget::grid* m_grid;
+	void setPos(nugget::coords pos) {
+		m_origin = pos;
+	}
+
+protected:
+	TetrisGrid* m_grid;
+	nugget::coords m_origin;
+	std::vector<nugget::coords> shape;
 };
 
