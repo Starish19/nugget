@@ -2,24 +2,26 @@
 #include "Tetris.h"
 #include "Block.h"
 #include <iostream>
+#include "BlockManager.h"
 
 Tetris TetrisApp;
 nugget::NuggetApplicazione* nugget::nugApp = &TetrisApp;
 
 void Tetris::Start() {
-	std::unique_ptr<Block> block = std::make_unique<Block>(&map, nugget::coords{3,3});
+	std::unique_ptr<Block> block = std::make_unique<Block>(&map, I_TETROMINO, I_COLOR);
 	m_objects["Block_0_0"] = std::move(block);
 
 	nugget::nugResource->addFile("assets", "assets.zip");
 
 	nugget::nugResource->LoadImage("mudkip", "assets", "assets/images/mudkip.png");
 	nugget::nugResource->LoadImage("argh", "assets", "assets/images/th.jpg");
-	nugget::nugResource->LoadImage("red", "assets", "assets/images/RedRubix.png");
-	nugget::nugResource->LoadImage("blue", "assets", "assets/images/BlueRubix.png");
-	nugget::nugResource->LoadImage("green", "assets", "assets/images/GreenRubix.png");
-	nugget::nugResource->LoadImage("yellow", "assets", "assets/images/YellowRubix.png");
-	nugget::nugResource->LoadImage("purple", "assets", "assets/images/PurpleRubix.png");
-	nugget::nugResource->LoadImage("test", "assets", "assets/images/test.png");
+	nugget::nugResource->LoadImage(Z_COLOR, "assets", "assets/images/RedRubix.png");
+	nugget::nugResource->LoadImage(J_COLOR, "assets", "assets/images/BlueRubix.png");
+	nugget::nugResource->LoadImage(I_COLOR, "assets", "assets/images/CyanRubix.png");
+	nugget::nugResource->LoadImage(S_COLOR, "assets", "assets/images/GreenRubix.png");
+	nugget::nugResource->LoadImage(O_COLOR, "assets", "assets/images/YellowRubix.png");
+	nugget::nugResource->LoadImage(L_COLOR, "assets", "assets/images/OrangeRubix.png");
+	nugget::nugResource->LoadImage(T_COLOR, "assets", "assets/images/PurpleRubix.png");
 
 	nugget::nugResource->LoadWave("yipee", "assets", "assets/audio/yipee.mp3");
 	nugget::nugResource->getSoundFromWave("yipee");

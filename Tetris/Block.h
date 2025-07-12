@@ -5,7 +5,7 @@
 class Block : public nugget::GameObject
 {
 public:
-	Block(nugget::grid *grid, nugget::coords origin);
+	Block(nugget::grid *grid, Tetromino minos, std::string color);
 	~Block();
 
 	void Start() override;
@@ -13,6 +13,7 @@ public:
 
 protected:
 	nugget::grid* m_grid;
-	std::vector<nugget::coords> shape;
+	Tetromino m_minos;
+	std::string color;
 };
 

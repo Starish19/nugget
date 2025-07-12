@@ -1,8 +1,8 @@
 #include "Block.h"
 #include "TetrisComp.h"
 
-Block::Block(nugget::grid* grid, nugget::coords origin) {
-	m_grid = grid;
+Block::Block(nugget::grid* grid, Tetromino minos, std::string c) : m_grid(grid), m_minos(minos), color(c){
+
 }
 
 Block::~Block() {
@@ -18,13 +18,10 @@ void Block::Start() {
 
 	//Render Component
 	auto renderComp = addComponent<renderComponent_Grid_Shape>();
-	renderComp->setTexture("red");
+	renderComp->setTexture(color);
 	renderComp->setGrid(m_grid);
-	renderComp->m_pos = {5,0};
-	renderComp->setShape(std::vector <nugget::coords>{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {1, -1}});
-	//m_grid->move(renderComp->m_pos);
-
-	BlockManager::conglomerate.push_back(nugget::coords{0,0});
+	renderComp->m_pos = nugget::coords{5,0};
+	renderComp->setShape(m_minos);
 
 
 	//Audio Component

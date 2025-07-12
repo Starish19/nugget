@@ -7,6 +7,6 @@ class Tetris : public nugget::NuggetApplicazione
 	void Render() final;
 
 private:
-	nugget::grid map = nugget::grid({50,50}, {25,25}, 10, 10);
+	nugget::grid map = nugget::grid(nugget::coords{50,50}, nugget::dimensions{25,25}, 10, 10);
 };
 
