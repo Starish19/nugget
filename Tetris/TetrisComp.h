@@ -18,15 +18,24 @@ struct renderComponent_Grid_Shape : public nugget::renderComponent_Grid{
 	}
 
 	void rotate90() {
-		for (nugget::coords& pos : m_minos) {
-			pos.rotate90({0,0});
+		Tetromino rotated(m_minos.size());
+		for (int i = 0; i < m_minos.size(); i++) {
+			mino pos = m_minos[i];
+			if (!(m_grid->attemptRotate90(m_pos + pos, m_pos))) {
+				pos.rotate90();
+				m_pos -= pos;
+				i = -1;
+			}
+			else rotated[i] = pos.rotate90();
 		}
+		m_minos = rotated;
 	}
 
 	void move(nugget::coords to) {
 		for (nugget::coords pos : m_minos) {
-			if (!(m_grid->attemptMove(m_pos + pos, to)))
+			if (!(m_grid->attemptMove(m_pos + pos, to))) {
 				return;
+			}
 		}
 		m_pos += to;
 	}

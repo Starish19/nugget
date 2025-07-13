@@ -29,7 +29,11 @@ namespace nugget {
 			return {posY, posX};
 		}
 
-		void rotate90(coords rotateAround) {
+		coords one() {
+			return coords{ posX, posY };
+		}
+
+		coords rotate90(coords rotateAround = {0,0}) {
 			*this -= rotateAround;
 
 			int temp = posX;
@@ -37,6 +41,7 @@ namespace nugget {
 			posY = temp;
 
 			*this += rotateAround;
+			return *this;
 		}
 	};
 
@@ -55,6 +60,7 @@ namespace nugget {
 		dimensions getGridDimensions();
 		dimensions getCellDimensions();
 
+		bool attemptRotate90(coords toRotate, coords rotateAround = {0,0});
 		bool attemptMove(coords from, coords to);
 
 	protected:

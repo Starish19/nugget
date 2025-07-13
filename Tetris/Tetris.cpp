@@ -8,7 +8,7 @@ Tetris TetrisApp;
 nugget::NuggetApplicazione* nugget::nugApp = &TetrisApp;
 
 void Tetris::Start() {
-	std::unique_ptr<Block> block = std::make_unique<Block>(&map, I_TETROMINO, I_COLOR);
+	std::unique_ptr<Block> block = std::make_unique<Block>(&map, J_TETROMINO, J_COLOR);
 	m_objects["Block_0_0"] = std::move(block);
 
 	nugget::nugResource->addFile("assets", "assets.zip");

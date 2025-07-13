@@ -25,3 +25,10 @@ bool nugget::grid::attemptMove(coords from, coords to) {
 		return false;
 	else return true;
 }
+
+bool nugget::grid::attemptRotate90(coords toRotate, coords rotateAround) {
+	toRotate.rotate90(rotateAround);
+	if (toRotate > coords{ rows,columns } || coords{ 0,0 } > toRotate)
+		return false;
+	else return true;
+}
