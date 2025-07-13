@@ -1,6 +1,6 @@
 #pragma once
 #include "nugget.h"
-#include "BlockManager.h"
+#include "Tetromino.h"
 
 class Block : public nugget::GameObject
 {

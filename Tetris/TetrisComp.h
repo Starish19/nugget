@@ -1,6 +1,6 @@
 #pragma once
 #include "nugget.h"
-#include "BlockManager.h"
+#include "Tetromino.h"
 
 struct renderComponent_Grid_Shape : public nugget::renderComponent_Grid{
 	renderComponent_Grid_Shape(nugget::GameObject* g) : renderComponent_Grid(g) {}
@@ -38,6 +38,15 @@ struct renderComponent_Grid_Shape : public nugget::renderComponent_Grid{
 			}
 		}
 		m_pos += to;
+	}
+
+	bool checkGround() {
+		for (nugget::coords pos : m_minos) {
+			if (!(m_grid->attemptMove(m_pos + pos, m_pos + nugget::coords{0,1}))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 protected:

@@ -12,10 +12,11 @@ int main() {
 
 	nugAudio->Initalize();
 	SetMasterVolume(0.5);
-	SetTargetFPS(30);
+	SetTargetFPS(10);
 
 	nugResource->Initalize();
 	nugInput->Initalize();
+	nugRand->Initalize();
 
 	nugget::nugApp->Start();
 

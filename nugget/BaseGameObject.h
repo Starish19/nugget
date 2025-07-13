@@ -6,7 +6,7 @@ namespace nugget {
 	class GameObject {
 	public:
 		virtual void Start() {for (auto& c : m_ComponentList) c->Start(); }
-		virtual void Update(float dt) {for (auto& c : m_ComponentList) c->Update(dt); }
+		virtual void Update(float dt) {if (active) for (auto& c : m_ComponentList) c->Update(dt); }
 
 		template <class C>
 		C* addComponent() {
@@ -40,6 +40,7 @@ namespace nugget {
 
 	protected:
 		std::vector<std::unique_ptr<Component>> m_ComponentList;
+		bool active = true;
 	};
 
 	

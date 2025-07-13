@@ -57,6 +57,8 @@ void Block::Start() {
 }
 
 void Block::Update(float dt) {
+	if (!active) return;
+
 	nugget::GameObject::Update(dt);
 
 	if (auto renderComp = getComponent<renderComponent_Grid_Shape>()) {

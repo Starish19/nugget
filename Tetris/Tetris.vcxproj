@@ -142,6 +142,7 @@
     <ClInclude Include="BlockManager.h" />
     <ClInclude Include="Tetris.h" />
     <ClInclude Include="TetrisComp.h" />
+    <ClInclude Include="Tetromino.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -57,6 +57,9 @@
     <ClCompile Include="grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RandomRaylib.cpp">
+      <Filter>Source Files\Raylib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderSystemRaylib.h">
@@ -115,6 +118,12 @@
     </ClInclude>
     <ClInclude Include="grid.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files\abstractions</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomRaylib.h">
+      <Filter>Header Files\Raylib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
