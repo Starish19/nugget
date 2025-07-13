@@ -1,15 +1,17 @@
 #include "nugget.h"
 #include "Tetris.h"
+#include "TetrisComp.h"
 #include "BlockManager.h"
 #include <iostream>
-#include "BlockManager.h"
 
 Tetris TetrisApp;
 nugget::NuggetApplicazione* nugget::nugApp = &TetrisApp;
 
 void Tetris::Start() {
-	std::unique_ptr<Block> block = std::make_unique<Block>(&map, J_TETROMINO, J_COLOR);
+	std::unique_ptr<BlockManager> block = std::make_unique<BlockManager>(&map);
 	m_objects["Block_0_0"] = std::move(block);
+
+	activeBlock = newBlock();
 
 	nugget::nugResource->addFile("assets", "assets.zip");
 
@@ -42,6 +44,14 @@ void Tetris::Update(float dt) {
 	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
 		it->second->Update(dt);
 	}
+
+	if (auto TetrisComp = activeBlock->getComponent<renderComponent_Grid_Shape>()) {
+		if (TetrisComp->checkGround()) {
+			activeBlock->active = false;
+			activeBlock = newBlock();
+			activeBlock->Start();
+		}
+	}
 }
 
 void Tetris::Render() {
@@ -50,4 +60,36 @@ void Tetris::Render() {
 			renderable->Render();
 		}
 	}
+}
+
+Block* Tetris::newBlock() {
+	std::unique_ptr<Block> newBlock;
+	switch (nugget::nugRand->getRandom(I, Z)) {
+	case I:
+		newBlock = std::make_unique<Block>(&map, I_TETROMINO, I_COLOR);
+		break;
+	case J:
+		newBlock = std::make_unique<Block>(&map, J_TETROMINO, J_COLOR);
+		break;
+	case L:
+		newBlock = std::make_unique<Block>(&map, L_TETROMINO, L_COLOR);
+		break;
+	case O:
+		newBlock = std::make_unique<Block>(&map, O_TETROMINO, O_COLOR);
+		break;
+	case S:
+		newBlock = std::make_unique<Block>(&map, S_TETROMINO, S_COLOR);
+		break;
+	case T:
+		newBlock = std::make_unique<Block>(&map, T_TETROMINO, T_COLOR);
+		break;
+	case Z:
+		newBlock = std::make_unique<Block>(&map, Z_TETROMINO, Z_COLOR);
+		break;
+	default:
+		break;
+	}
+	Block* b = newBlock.get();
+	m_objects["Block" + std::to_string(BlockCount++)] = std::move(newBlock);
+	return b;
 }

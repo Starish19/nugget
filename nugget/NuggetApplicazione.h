@@ -3,6 +3,8 @@
 #include "BaseGameObject.h"
 
 namespace nugget {
+	typedef std::unordered_map<std::string, std::unique_ptr<nugget::GameObject>> objectList;
+
 	class NuggetApplicazione
 	{
 	public:
@@ -11,7 +13,7 @@ namespace nugget {
 		virtual void Render() = 0;
 
 	protected:
-	std::unordered_map<std::string, std::unique_ptr<GameObject>> m_objects;
+	objectList m_objects;
 	};
 
 	extern NuggetApplicazione* nugApp;

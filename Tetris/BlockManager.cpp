@@ -3,36 +3,48 @@
 
 
 void BlockManager::Start() {
-
+	activeBlock = newBlock();
 }
 
 void BlockManager::Update(float dt) {
 	activeBlock->Update(dt);
 
 	if (auto TetrisComp = activeBlock->getComponent<renderComponent_Grid_Shape>()) {
-		if (TetrisComp->checkGround())
+		if (TetrisComp->checkGround()) {
 			activeBlock = newBlock();
+			activeBlock->Start();
+		}
 	}
 }
 
 Block* BlockManager::newBlock() {
+	std::unique_ptr<Block> newBlock;
 	switch (nugget::nugRand->getRandom(I, Z)) {
 	case I:
-		blocks.push_back(Block(m_grid, I_TETROMINO, I_COLOR));
+		newBlock = std::make_unique<Block>(m_grid, I_TETROMINO, I_COLOR);
+		break;
 	case J:
-		blocks.push_back(Block(m_grid, J_TETROMINO, J_COLOR));
+		newBlock = std::make_unique<Block>(m_grid, J_TETROMINO, J_COLOR);
+		break;
 	case L:
-		blocks.push_back(Block(m_grid, L_TETROMINO, L_COLOR));
+		newBlock = std::make_unique<Block>(m_grid, L_TETROMINO, L_COLOR);
+		break;
 	case O:
-		blocks.push_back(Block(m_grid, O_TETROMINO, O_COLOR));
+		newBlock = std::make_unique<Block>(m_grid, O_TETROMINO, O_COLOR);
+		break;
 	case S:
-		blocks.push_back(Block(m_grid, S_TETROMINO, S_COLOR));
+		newBlock = std::make_unique<Block>(m_grid, S_TETROMINO, S_COLOR);
+		break;
 	case T:
-		blocks.push_back(Block(m_grid, T_TETROMINO, T_COLOR));
+		newBlock = std::make_unique<Block>(m_grid, T_TETROMINO, T_COLOR);
+		break;
 	case Z:
-		blocks.push_back(Block(m_grid, Z_TETROMINO, Z_COLOR));
+		newBlock = std::make_unique<Block>(m_grid, Z_TETROMINO, Z_COLOR);
+		break;
 	default:
 		break;
 	}
-	return &blocks[blocks.size() - 1];
+	Block* b = newBlock.get();
+	world_objects["Block" + std::to_string(blockCount)] = std::move(newBlock);
+	return b;
 }

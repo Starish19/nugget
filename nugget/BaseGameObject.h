@@ -38,9 +38,9 @@ namespace nugget {
 			}
 		}
 
+		bool active = true;
 	protected:
 		std::vector<std::unique_ptr<Component>> m_ComponentList;
-		bool active = true;
 	};
 
 	

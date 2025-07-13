@@ -42,7 +42,7 @@ struct renderComponent_Grid_Shape : public nugget::renderComponent_Grid{
 
 	bool checkGround() {
 		for (nugget::coords pos : m_minos) {
-			if (!(m_grid->attemptMove(m_pos + pos, m_pos + nugget::coords{0,1}))) {
+			if (!(m_grid->attemptMove(m_pos + pos, nugget::coords{0,1}))) {
 				return true;
 			}
 		}
