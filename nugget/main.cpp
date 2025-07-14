@@ -6,7 +6,7 @@ using namespace nugget;
 
 int main() {
 	nugRender->Initalize();
-	nugRender->setWindowParams(600, 600, "Nugget Engine");
+	nugRender->setWindowParams(600, 900, "Nugget Engine");
 	nugRender->setClear(BLUE);
 	SetWindowIcon(LoadImage("assets/images/mudkip.png"));
 
@@ -18,7 +18,7 @@ int main() {
 	nugInput->Initalize();
 	nugRand->Initalize();
 
-	nugget::nugApp->Start();
+	nugget::nugApp->Initalize();
 
 	int x = 300, y = 300;
 	float width = 100;

@@ -25,6 +25,10 @@ namespace nugget {
 			*this = *this - b;
 		}
 
+		bool operator ==(coords b) {
+			return (posX == b.posX && posY == b.posY);
+		}
+
 		coords inverted() {
 			return {posY, posX};
 		}

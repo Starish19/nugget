@@ -22,13 +22,13 @@ nugget::dimensions nugget::grid::getCellDimensions() {
 
 bool nugget::grid::attemptMove(coords from, coords to) {
 	if ((from + to) > coords{ rows,columns } || coords{ 0,0 } > (from + to))
-		return false;
-	else return true;
+		return true;
+	else return false;
 }
 
 bool nugget::grid::attemptRotate90(coords toRotate, coords rotateAround) {
 	toRotate.rotate90(rotateAround);
 	if (toRotate > coords{ rows,columns } || coords{ 0,0 } > toRotate)
-		return false;
-	else return true;
+		return true;
+	else return false;
 }

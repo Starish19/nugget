@@ -10,10 +10,6 @@ public:
 
 	void Start() override;
 	void Update(float dt) override;
-
 protected:
-	nugget::grid* m_grid;
-	Tetromino m_minos;
-	std::string color;
 };
 

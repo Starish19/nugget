@@ -125,6 +125,9 @@
     <ClInclude Include="RandomRaylib.h">
       <Filter>Header Files\Raylib</Filter>
     </ClInclude>
+    <ClInclude Include="NuggetScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="nugget.rc">

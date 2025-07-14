@@ -87,10 +87,9 @@ namespace nugget{
 		~renderComponent_Grid() {}
 
 		void Start() override;
-		void Update(float dt) override {
-			if (m_grid) screen_pos = m_grid->getCellPosition(m_pos.posX, m_pos.posY);
-		}
+		void Update(float dt) override {}
 		void Render() override {
+			if (m_grid) screen_pos = m_grid->getCellPosition(m_pos.posX, m_pos.posY);
 			if (tex) nugRender->Draw(tex, screen_pos.posX, screen_pos.posY);
 		}
 

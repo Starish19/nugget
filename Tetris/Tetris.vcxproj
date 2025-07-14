@@ -134,12 +134,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
-    <ClCompile Include="BlockManager.cpp" />
+    <ClCompile Include="mainGame.cpp" />
     <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Block.h" />
-    <ClInclude Include="BlockManager.h" />
+    <ClInclude Include="mainGame.h" />
     <ClInclude Include="Tetris.h" />
     <ClInclude Include="TetrisComp.h" />
     <ClInclude Include="Tetromino.h" />

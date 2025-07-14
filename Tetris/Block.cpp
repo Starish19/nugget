@@ -1,17 +1,9 @@
 #include "Block.h"
 #include "TetrisComp.h"
 
-Block::Block(nugget::grid* grid, Tetromino minos, std::string c) : m_grid(grid), m_minos(minos), color(c){
-
-}
-
-Block::~Block() {
-
-}
-
-void Block::Start() {
+Block::Block(nugget::grid* grid, Tetromino minos, std::string color) {
 	//Input Component
-	std::vector<int> keys = {nugget::KEY_A, nugget::KEY_D, nugget::KEY_S, nugget::KEY_R};
+	std::vector<int> keys = { nugget::KEY_A, nugget::KEY_D, nugget::KEY_S, nugget::KEY_R };
 	auto inputComp = addComponent<nugget::inputComponent>();
 	inputComp->setKeys(keys);
 
@@ -19,9 +11,9 @@ void Block::Start() {
 	//Render Component
 	auto renderComp = addComponent<renderComponent_Grid_Shape>();
 	renderComp->setTexture(color);
-	renderComp->setGrid(m_grid);
-	renderComp->m_pos = nugget::coords{5,0};
-	renderComp->setShape(m_minos);
+	renderComp->setGrid(grid);
+	renderComp->m_pos = nugget::coords{ 5,0 };
+	renderComp->setShape(minos);
 
 
 	//Audio Component
@@ -37,22 +29,31 @@ void Block::Start() {
 		}, 1);
 	//Move Left/right
 	timeComp->addTrigger([=]() {
-		std::vector<int> keys =  inputComp->getKeys();
+		std::vector<int> keys = inputComp->getKeys();
 		for (int key : keys) {
 			switch (key)
 			{
 			case nugget::KEY_A:
-				renderComp->move({-1,0});
+				renderComp->move({ -1,0 });
 				break;
 			case nugget::KEY_D:
-				renderComp->move({1,0});
+				renderComp->move({ 1,0 });
+				break;
+			case nugget::KEY_S:
+				renderComp->move({ 0, 1 });
 				break;
 			default:
 				break;
 			}
 		}
-		}, 0.4);
+		}, 0.2);
+}
 
+Block::~Block() {
+
+}
+
+void Block::Start() {
 	nugget::GameObject::Start();
 }
 
@@ -66,8 +67,6 @@ void Block::Update(float dt) {
 			if (inputComp->getKey(nugget::KEY_R)) {
 				renderComp->rotate90();
 			}
-			if (inputComp->getKey(nugget::KEY_S))
-				renderComp->move({0,1});
 		}
 	}
 }

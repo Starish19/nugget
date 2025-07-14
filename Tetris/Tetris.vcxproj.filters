@@ -21,7 +21,7 @@
     <ClCompile Include="Block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BlockManager.cpp">
+    <ClCompile Include="mainGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,10 +35,10 @@
     <ClInclude Include="TetrisComp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlockManager.h">
+    <ClInclude Include="Tetromino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tetromino.h">
+    <ClInclude Include="mainGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

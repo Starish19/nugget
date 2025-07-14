@@ -61,6 +61,6 @@ Texture* nugget::ResourceSystemRaylib::getTextureFromImage(const std::string& na
 
 Sound* nugget::ResourceSystemRaylib::getSoundFromWave(const std::string& name) {
 	if (snds.find(name) == snds.end())
-		snds[name] = LoadSoundFromWave(wavs.at(name));
+		snds[name] = LoadSoundFromWave(wavs[name]);
 	return &snds[name];
 }

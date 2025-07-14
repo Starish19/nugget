@@ -160,6 +160,7 @@
     <ClInclude Include="grid.h" />
     <ClInclude Include="nugget.h" />
     <ClInclude Include="NuggetApplicazione.h" />
+    <ClInclude Include="NuggetScene.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="RandomRaylib.h" />
     <ClInclude Include="resource.h" />
