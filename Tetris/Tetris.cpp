@@ -1,6 +1,7 @@
 #include "nugget.h"
 #include "Tetris.h"
 #include "mainGame.h"
+#include "MainMenu.h"
 
 Tetris TetrisApp;
 nugget::NuggetApplicazione* nugget::nugApp = &TetrisApp;
@@ -8,7 +9,8 @@ nugget::NuggetApplicazione* nugget::nugApp = &TetrisApp;
 void Tetris::Initalize() {
 	nugget::nugResource->addFile("assets", "assets.zip");
 
-	current_scene = addScene<mainGame>("Main");
+	current_scene = addScene<MainMenu>("Menu");
+	addScene<mainGame>("Main");
 
 	current_scene->Start();
 }

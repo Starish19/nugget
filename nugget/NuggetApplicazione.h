@@ -22,6 +22,7 @@ namespace nugget {
 			if (m_scenes.find(sceneName) != m_scenes.end()) {
 				current_scene->Close();
 				current_scene = m_scenes[sceneName].get();
+				current_scene->Start();
 			}
 		}
 		

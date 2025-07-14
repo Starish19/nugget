@@ -6,6 +6,8 @@
 nugget::renderComponent_Rect::renderComponent_Rect(GameObject* g) : Renderable(g) {
 	rect = new Rectangle;
 	setRect();
+	color = new Color;
+	setColor();
 }
 
 void nugget::renderComponent_Rect::setRect(float x, float y, float width, float height) {
@@ -67,4 +69,28 @@ void nugget::renderComponent_Grid::Start() {
 		tex->width = dims.width;
 		tex->height = dims.Height;
 	}
+}
+
+void nugget::inputComponent::Update(float dt) {
+	nugInput->KeyList(keys);
+	Vector2 pos = nugInput->MousePos();
+	mousePos = nugget::coords{ (int)pos.x, (int)pos.y };
+
+	for (int i = 0; i < events.size() && i < buttons.size(); i++) {
+		nugget::coords buttonPos{ (int)buttons[i]->x, (int)buttons[i]->y };
+		nugget::coords buttonDim{ (int)buttons[i]->width, (int)buttons[i]->height };
+		if (mousePos.posX > buttonPos.posX && mousePos.posY > buttonPos.posY && (buttonPos + buttonDim).posX > mousePos.posX && (buttonPos + buttonDim).posY > mousePos.posY && nugInput->MousePressed(MOUSE_BUTTON_LEFT)) {
+			events[i]();
+		}
+	}
+}
+
+void nugget::inputComponent::addButton(std::function<void()> event, nugget::coords pos, nugget::dimensions dim) {
+	events.push_back(event);
+	Rectangle* rect = new Rectangle{ (float)pos.posX, (float)pos.posY, (float)dim.width, (float)dim.Height };
+	buttons.push_back(rect);
+}
+
+void nugget::renderComponent_Rect::setColor(int r, int g, int b, int a) {
+	*color = Color{ unsigned char(r), unsigned char(g), unsigned char(b), unsigned char(a) };
 }

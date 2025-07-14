@@ -135,11 +135,13 @@
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="mainGame.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Block.h" />
     <ClInclude Include="mainGame.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Tetris.h" />
     <ClInclude Include="TetrisComp.h" />
     <ClInclude Include="Tetromino.h" />

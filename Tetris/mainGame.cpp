@@ -22,6 +22,13 @@ void mainGame::Start() {
 	auto textComp = m_objects["Hello"]->addComponent<nugget::renderComponent_Text>();
 	textComp->setText("Tetris");
 
+	std::unique_ptr<nugget::GameObject> pauseMenu = std::make_unique<nugget::GameObject>();
+	m_objects["pause"] = std::move(pauseMenu);
+	auto renderComp = m_objects["pause"]->addComponent<nugget::renderComponent_Rect>();
+	renderComp->setRect(0,0, nugget::nugRender->getWidth(), nugget::nugRender->getHeight());
+	renderComp->setColor(200,200,200,150);
+	renderComp->render = false;
+
 	activeBlock = newBlock();
 
 	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
@@ -40,15 +47,27 @@ void mainGame::Update(float dt) {
 			activeBlock = newBlock();
 			activeBlock->Start();
 		}
+	}  
+
+	if (nugget::nugInput->KeyPressed(nugget::KEY_P)) {
+		for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
+			it->second->active = pauseToggle;
+		}
+		pauseToggle = !pauseToggle;
 	}
 }
 
 void mainGame::Render() {
 	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
 		if (auto renderable = it->second->getSubComponent<nugget::Renderable>()) {
-			renderable->Render();
+			if (renderable->render) renderable->Render();
 		}
 	}
+
+	if (pauseToggle) {
+		m_objects["pause"]->getSubComponent<nugget::Renderable>()->Render();
+	}
+
 }
 
 void mainGame::Close() {

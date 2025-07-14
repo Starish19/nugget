@@ -17,6 +17,7 @@ private:
 	nugget::grid map = nugget::grid(nugget::coords{ 50,50 }, nugget::dimensions{ 25,25 }, 15, 20);
 	Block* activeBlock;
 	int BlockCount = 0;
-	float time;
+
+	bool pauseToggle = false;
 };
 

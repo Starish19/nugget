@@ -9,9 +9,15 @@
 namespace nugget{
 	struct inputComponent : public Component {
 		inputComponent(GameObject* g) : Component(g) {}
+		~inputComponent() {
+			for (Rectangle* rect : buttons) {
+				delete rect;
+			}
+			buttons.clear();
+		}
 
 		void Start() override {}
-		void Update(float dt) override { nugInput->KeyList(keys); }
+		void Update(float dt) override;
 
 		void setKeys(std::vector<int> k) {
 			for (int key : k) {
@@ -31,14 +37,21 @@ namespace nugget{
 			return nugInput->KeyPressed(key);
 		}
 
+		virtual void addButton(std::function<void()> event, nugget::coords pos, nugget::dimensions dim);
+
 	protected:
 		std::unordered_map<int, bool> keys;
+		nugget::coords mousePos = {0,0};
+		std::vector<std::function<void()>> events;
+		std::vector<Rectangle*> buttons;
 	};
 
 	struct Renderable : public Component {
 		Renderable(GameObject* g) : Component(g) {}
 
 		virtual void Render() = 0;
+
+		bool render = true;
 	};
 
 	typedef enum {X,Y,WIDTH,HEIGHT}RectValue;
@@ -47,11 +60,12 @@ namespace nugget{
 		renderComponent_Rect(GameObject* g);
 		~renderComponent_Rect() {
 			delete rect;
+			delete color;
 		}
 
 		void Start() override {};
 		void Update(float dt) override {}
-		void Render() override {if (tex) nugRender->Draw(tex, rect); }
+		void Render() override { if (tex) nugRender->Draw(tex, rect); else nugRender->Draw(rect, color); }
 
 		virtual void setTexture(const std::string img_id) {
 			tex = nugResource->getTextureFromImage(img_id);
@@ -61,14 +75,19 @@ namespace nugget{
 		virtual void setRect(RectValue item, float value);
 		virtual float getRect(RectValue item);
 
+		void setColor(int r = 0, int g = 0, int b = 0, int a = 100);
+
 	protected:
 		Texture* tex = nullptr;
 		Rectangle* rect = nullptr;
+		Color* color;
 	};
 
 	struct renderComponent_Text : public Renderable {
 		renderComponent_Text(GameObject* g);
-		~renderComponent_Text() {}
+		~renderComponent_Text() {
+			delete color;
+		}
 
 		void Start() override {}
 		void Update(float dt) override {}

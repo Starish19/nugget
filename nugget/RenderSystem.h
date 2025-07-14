@@ -21,6 +21,7 @@ namespace nugget {
 		virtual void StartDrawing() = 0; // Prepare Frame Buffer
 		virtual void FinishDrawing() = 0; // Swap buffers
 
+		virtual void Draw(Rectangle* rect, Color* color) = 0;
 		virtual void Draw(Texture* texture, int posX, int posY) = 0;
 		virtual void Draw(Texture* texture, Rectangle* dimensions) = 0; //Draw Rectangle
 		virtual void Text(const char* text, int pos_x, int pos_y, int font_size, Color* color) = 0; //Write text at position
