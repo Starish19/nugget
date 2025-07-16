@@ -14,7 +14,9 @@ void mainGame::Start() {
 	nugget::nugResource->LoadImage(T_COLOR, "assets", "assets/images/PurpleRubix.png");
 
 	nugget::nugResource->LoadWave("yipee", "assets", "assets/audio/yipee.mp3");
-	nugget::nugResource->getSoundFromWave("yipee");
+
+	nugget::nugResource->LoadMusic("agent_squidge", "assets", "assets/audio/Agent_Squidge.mp3");
+	nugget::nugAudio->StartMusic(nugget::nugResource->getMusic("agent_squidge"));
 
 	std::unique_ptr<nugget::GameObject> text = std::make_unique<nugget::GameObject>();
 	m_objects["Hello"] = std::move(text);
@@ -25,8 +27,8 @@ void mainGame::Start() {
 	std::unique_ptr<nugget::GameObject> pauseMenu = std::make_unique<nugget::GameObject>();
 	m_objects["pause"] = std::move(pauseMenu);
 	auto renderComp = m_objects["pause"]->addComponent<nugget::renderComponent_Rect>();
-	renderComp->setRect(0,0, nugget::nugRender->getWidth(), nugget::nugRender->getHeight());
-	renderComp->setColor(200,200,200,150);
+	renderComp->setRect(nugget::Rectangle{0,0, nugget::nugRender->getWidth(), nugget::nugRender->getHeight()});
+	renderComp->setColor(nugget::Color{ 200,200,200,150 });
 	renderComp->render = false;
 
 	activeBlock = newBlock();

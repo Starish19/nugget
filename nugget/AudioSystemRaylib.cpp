@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "AudioSystemRaylib.h"
+#include "raylib.h"
 
 #ifdef AUDIOSYSTEM_RAYLIB
 	nugget::AudioSystemRaylib nugAudioSystemRaylib;
@@ -22,26 +23,29 @@ void nugget::AudioSystemRaylib::Shutdown() {
 	CloseAudioDevice();
 }
 
-void nugget::AudioSystemRaylib::PlayNoise(Sound* sound) {
-	SetSoundVolume(*sound, 0.1);
+void nugget::AudioSystemRaylib::PlayNoise(Sound* sound, float volume) {
+	SetSoundVolume(*sound, volume);
 	if (!IsSoundPlaying(*sound)) PlaySound(*sound);
 }
 
 void nugget::AudioSystemRaylib::StartMusic(Music* music, bool loop) {
+	if (!IsMusicValid) return;
+
 	PlayMusicStream(*music);
+	SetMusicVolume(*music, 1);
 	music->looping = loop;
 
-	std::unique_ptr<Music> m_music(music);
+	m_music = music;
 }
 
 void nugget::AudioSystemRaylib::EndMusic() {
-	StopMusicStream(*m_music.get());
+	StopMusicStream(*m_music);
 }
 
 void nugget::AudioSystemRaylib::Pause() {
-	PauseMusicStream(*m_music.get());
+	PauseMusicStream(*m_music);
 }
 
 void nugget::AudioSystemRaylib::Resume() {
-	ResumeMusicStream(*m_music.get());
+	ResumeMusicStream(*m_music);
 }

@@ -2,11 +2,23 @@
 #include "subsystem.h"
 
 //Forward Declarations
-struct Color; 
 struct Texture;
-struct Rectangle;
 
 namespace nugget {
+	struct Color {
+		unsigned char r;
+		unsigned char g;
+		unsigned char b;
+		unsigned char a;
+	};
+
+	struct Rectangle {
+		int x;
+		int y;
+		int width;
+		int height;
+	};
+
 	//abstract Render Class
 	class RenderSystem : public subsystem
 	{
@@ -21,13 +33,14 @@ namespace nugget {
 		virtual void StartDrawing() = 0; // Prepare Frame Buffer
 		virtual void FinishDrawing() = 0; // Swap buffers
 
-		virtual void Draw(Rectangle* rect, Color* color) = 0;
+		virtual void Draw(Rectangle rect, Color color) = 0;
 		virtual void Draw(Texture* texture, int posX, int posY) = 0;
-		virtual void Draw(Texture* texture, Rectangle* dimensions) = 0; //Draw Rectangle
-		virtual void Text(const char* text, int pos_x, int pos_y, int font_size, Color* color) = 0; //Write text at position
+		virtual void Draw(Texture* texture, Rectangle dimensions) = 0; //Draw Rectangle
+		virtual void Text(const char* text, int pos_x, int pos_y, int font_size, Color color) = 0; //Write text at position
 	protected:
 		int win_width;
 		int win_height;
+		Color Clear;
 	};
 
 	// Global Instance of Renderer

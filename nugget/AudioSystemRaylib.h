@@ -1,6 +1,5 @@
 #pragma once
 #include "AudioSystem.h"
-#include "raylib.h"
 
 namespace nugget {
 
@@ -13,7 +12,7 @@ namespace nugget {
 		void Initalize() final;
 		void Shutdown() final;
 
-		void PlayNoise(Sound* sound) final;
+		void PlayNoise(Sound* sound, float volume) final;
 
 		void StartMusic(Music* music, bool loop) final;
 		void EndMusic() final;

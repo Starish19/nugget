@@ -6,10 +6,12 @@ struct renderComponent_Grid_Shape : public nugget::renderComponent_Grid{
 	renderComponent_Grid_Shape(nugget::GameObject* g) : renderComponent_Grid(g) {}
 
 	void Render() final {
-		if (!tex || !m_grid) return;
+		if (!m_tex || !m_grid) return;
 		for (nugget::coords pos : getMinos()) {
 			pos = m_grid->getCellPosition(pos.posX, pos.posY);
-			nugget::nugRender->Draw(tex, pos.posX, pos.posY);
+			m_rect.x = pos.posX;
+			m_rect.y = pos.posY;
+			nugget::nugRender->Draw(m_tex, m_rect);
 		}
 	}
 

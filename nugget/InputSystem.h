@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "subsystem.h"
+#include "grid.h"
 
 //Forward Declarations
 struct Vector2;
@@ -124,6 +125,16 @@ namespace nugget {
         KEY_VOLUME_DOWN = 25        // Key: Android volume down button
     } KeyboardKey;
 
+    typedef enum {
+        MOUSE_BUTTON_LEFT = 0,       // Mouse button left
+        MOUSE_BUTTON_RIGHT = 1,       // Mouse button right
+        MOUSE_BUTTON_MIDDLE = 2,       // Mouse button middle (pressed wheel)
+        MOUSE_BUTTON_SIDE = 3,       // Mouse button side (advanced mouse device)
+        MOUSE_BUTTON_EXTRA = 4,       // Mouse button extra (advanced mouse device)
+        MOUSE_BUTTON_FORWARD = 5,       // Mouse button forward (advanced mouse device)
+        MOUSE_BUTTON_BACK = 6,       // Mouse button back (advanced mouse device)
+    } MouseButton;
+
 	//Abstract Input System
 	class InputSystem : public subsystem
 	{
@@ -133,7 +144,7 @@ namespace nugget {
 		virtual void KeyList(std::unordered_map<int, bool> &keys) = 0; // Checks if keys are down from a map
 
 		virtual bool MousePressed(int button) = 0; // Mouse button pressed once
-		virtual Vector2 MousePos() = 0; // Mouse position in window
+		virtual coords MousePos() = 0; // Mouse position in window
 	};
 
 	// Global instance of Input system

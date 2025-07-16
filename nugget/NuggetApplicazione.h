@@ -1,9 +1,18 @@
 #pragma once
 #include "stdafx.h"
 #include "subsystem.h"
-#include "NuggetScene.h"
+#include "nugget.h"
 
 namespace nugget {
+	struct defaults {
+		float MasterVolume = 0.5;
+		int frameRate = 30;
+		Color ClearColor{ 0, 121, 241, 255 };
+		int WindowWidth = 600;
+		int WindowHeight = 900;
+		const char* WindowName = "Nugget Engine";
+	};
+
 	class NuggetApplicazione : public subsystem
 	{
 	public:
@@ -26,10 +35,15 @@ namespace nugget {
 			}
 		}
 		
+		defaults getDefaults() {
+			return app_defaults;
+		}
 
 	protected:
 	std::unordered_map<std::string, std::unique_ptr<NuggetScene>> m_scenes;
 	NuggetScene* current_scene;
+
+	defaults app_defaults;
 	};
 
 	extern NuggetApplicazione* nugApp;

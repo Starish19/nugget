@@ -7,17 +7,23 @@
 #include "grid.h"
 
 namespace nugget{
+	//InputComponent
 	struct inputComponent : public Component {
 		inputComponent(GameObject* g) : Component(g) {}
-		~inputComponent() {
-			for (Rectangle* rect : buttons) {
-				delete rect;
-			}
-			buttons.clear();
-		}
+		~inputComponent() {}
 
 		void Start() override {}
-		void Update(float dt) override;
+		void Update(float dt) {
+			nugInput->KeyList(keys);
+			coords mousePos = nugInput->MousePos();
+			for (int i = 0; i < events.size() && i < buttons.size(); i++) {
+				nugget::coords buttonPos{ (int)buttons[i].x, (int)buttons[i].y };
+				nugget::coords buttonDim{ (int)buttons[i].width, (int)buttons[i].height };
+				if (mousePos.posX > buttonPos.posX && mousePos.posY > buttonPos.posY && (buttonPos + buttonDim).posX > mousePos.posX && (buttonPos + buttonDim).posY > mousePos.posY && nugInput->MousePressed(MOUSE_BUTTON_LEFT)) {
+					events[i]();
+				}
+			}
+		}
 
 		void setKeys(std::vector<int> k) {
 			for (int key : k) {
@@ -37,15 +43,19 @@ namespace nugget{
 			return nugInput->KeyPressed(key);
 		}
 
-		virtual void addButton(std::function<void()> event, nugget::coords pos, nugget::dimensions dim);
+		void addButton(std::function<void()> event, Rectangle rect) {
+			events.push_back(event);
+			buttons.push_back(rect);
+		}
 
 	protected:
 		std::unordered_map<int, bool> keys;
 		nugget::coords mousePos = {0,0};
 		std::vector<std::function<void()>> events;
-		std::vector<Rectangle*> buttons;
+		std::vector<Rectangle> buttons;
 	};
 
+	//AbstactRenderComponent
 	struct Renderable : public Component {
 		Renderable(GameObject* g) : Component(g) {}
 
@@ -54,77 +64,84 @@ namespace nugget{
 		bool render = true;
 	};
 
-	typedef enum {X,Y,WIDTH,HEIGHT}RectValue;
-
+	//RenderComponentRect
 	struct renderComponent_Rect : public Renderable {
-		renderComponent_Rect(GameObject* g);
-		~renderComponent_Rect() {
-			delete rect;
-			delete color;
-		}
+		renderComponent_Rect(GameObject* g) : Renderable(g) {};
+		~renderComponent_Rect() {}
 
 		void Start() override {};
 		void Update(float dt) override {}
-		void Render() override { if (tex) nugRender->Draw(tex, rect); else nugRender->Draw(rect, color); }
-
-		virtual void setTexture(const std::string img_id) {
-			tex = nugResource->getTextureFromImage(img_id);
+		void Render() override {
+			if (m_tex) nugRender->Draw(m_tex, m_rect); 
+			else nugRender->Draw(m_rect, m_color); 
 		}
 
-		virtual void setRect(float x = 0, float y = 0, float width = 50, float height = 50);
-		virtual void setRect(RectValue item, float value);
-		virtual float getRect(RectValue item);
+		virtual void setTexture(const std::string img_id) {m_tex = nugResource->getTextureFromImage(img_id);}
 
-		void setColor(int r = 0, int g = 0, int b = 0, int a = 100);
+		virtual void setRect(Rectangle rect) { m_rect = rect; }
+		void setColor(Color color = { 0,0,0,255 }) { m_color = color; }
 
 	protected:
-		Texture* tex = nullptr;
-		Rectangle* rect = nullptr;
-		Color* color;
+		Texture* m_tex = nullptr;
+		Rectangle m_rect{0,0,50,50};
+		Color m_color{0,0,0,255};
 	};
 
+	//RenderComponentText
 	struct renderComponent_Text : public Renderable {
-		renderComponent_Text(GameObject* g);
-		~renderComponent_Text() {
-			delete color;
-		}
+		renderComponent_Text(GameObject* g) : Renderable(g) {}
+		~renderComponent_Text() {}
 
 		void Start() override {}
 		void Update(float dt) override {}
-		void Render() override { nugRender->Text(text.c_str(), 50, 50, 50, color);}
+		void Render() override { nugRender->Text(text.c_str(), pos.posX, pos.posY, size, color);}
 
 		void setText(std::string t) {text = t;}
-		void setColor(int r = 0, int g = 0, int b = 0, int a = 100);
+		void setPos(coords p) { pos = p; }
+		void setSize(int s) { size = s; }
+		void setColor(Color c) { color = c; }
 
 	protected:
-		std::string text;
-		Color* color;
+		std::string text = "";
+		coords pos{50,50};
+		Color color{ 200,200,200,100 };
+		int size = 50;
 	};
 
-	struct renderComponent_Grid : public Renderable {
-		renderComponent_Grid(GameObject* g) : Renderable(g) {}
+	//RenderComponentGrid
+	struct renderComponent_Grid : public renderComponent_Rect {
+		renderComponent_Grid(GameObject* g) : renderComponent_Rect(g) {}
 		~renderComponent_Grid() {}
 
-		void Start() override;
+		void Start() override {
+			if (m_grid) {
+				dimensions dims = m_grid->getCellDimensions();
+				m_rect.width = dims.width;
+				m_rect.height = dims.Height;
+			}
+		}
 		void Update(float dt) override {}
 		void Render() override {
-			if (m_grid) screen_pos = m_grid->getCellPosition(m_pos.posX, m_pos.posY);
-			if (tex) nugRender->Draw(tex, screen_pos.posX, screen_pos.posY);
+			if (m_grid) { 
+				coords screen_pos = m_grid->getCellPosition(m_pos.posX, m_pos.posY); 
+				m_rect.x = screen_pos.posX;
+				m_rect.y = screen_pos.posY;
+			}
+			if (m_tex) nugRender->Draw(m_tex, m_rect);
 		}
 
 		virtual void setTexture(const std::string img_id) {
-			tex = nugResource->getTextureFromImage(img_id);
+			m_tex = nugResource->getTextureFromImage(img_id);
 		}
 
 		void setGrid(grid* g) {m_grid = g;};
 
 		coords m_pos{0,0};
 	protected:
-		Texture* tex = nullptr;
-		coords screen_pos{0,0};
 		grid* m_grid = nullptr;
 	};
 
+	//AudioComponent
 	struct audioComponent : public Component {
 		audioComponent(GameObject* g) : Component(g) {}
 		~audioComponent() {}
@@ -140,9 +157,10 @@ namespace nugget{
 		Sound* snd = nullptr;
 	};
 
-	struct TimeKeep : public nugget::Component {
-		TimeKeep(nugget::GameObject* g) : Component(g) {}
-		~TimeKeep() {}
+	//TimeKeepComponent
+	struct TimeKeepComponent : public nugget::Component {
+		TimeKeepComponent(nugget::GameObject* g) : Component(g) {}
+		~TimeKeepComponent() {}
 
 		void Start() override {init_delays = delays;}
 		void Update(float dt) override {

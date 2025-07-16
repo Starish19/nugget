@@ -17,7 +17,7 @@ nugget::RenderSystemRaylib::~RenderSystemRaylib() {
 }
 
 void nugget::RenderSystemRaylib::Initalize() {
-	InitWindow(600,600,"Default");
+	InitWindow(600,900,"Nugget Engine");
 }
 
 void nugget::RenderSystemRaylib::Shutdown() {
@@ -45,7 +45,7 @@ int nugget::RenderSystemRaylib::getHeight() {
 
 void nugget::RenderSystemRaylib::StartDrawing() {
 	BeginDrawing();
-	ClearBackground(Clear);
+	ClearBackground(toRaylibColor(Clear));
 
 }
 
@@ -54,19 +54,19 @@ void nugget::RenderSystemRaylib::FinishDrawing() {
 }
 
 void nugget::RenderSystemRaylib::Draw(Texture2D* texture, int posX, int posY) {
-	DrawTexture(*texture, posX, posY, WHITE);
+	DrawTexture(*texture, posX, posY, RAYLIB_H::WHITE);
 }
 
-void nugget::RenderSystemRaylib::Draw(Texture2D* texture, Rectangle* rect) {
-	SetShapesTexture(*texture, Rectangle{0, 0, (float)texture->width, (float)texture->height });
-	DrawRectangleRec(*rect, WHITE);
-	SetShapesTexture(Texture(), Rectangle());
+void nugget::RenderSystemRaylib::Draw(Texture2D* texture, Rectangle rect) {
+	SetShapesTexture(*texture, RAYLIB_H::Rectangle{0, 0, (float)texture->width, (float)texture->height });
+	DrawRectangleRec(toRaylibRect(rect), RAYLIB_H::WHITE);
+	SetShapesTexture(Texture(), RAYLIB_H::Rectangle());
 }
 
-void nugget::RenderSystemRaylib::Draw(Rectangle* rect, Color* color) {
-	DrawRectangleRec(*rect, *color);
+void nugget::RenderSystemRaylib::Draw(Rectangle rect, Color color) {
+	DrawRectangleRec(toRaylibRect(rect), RAYLIB_H::Color{color.r, color.g, color.b, color.a});
 }
 
-void nugget::RenderSystemRaylib::Text(const char* text, int pos_x, int pos_y, int font_size, Color* color) {
-	DrawText(text, pos_x, pos_y, font_size, *color);
+void nugget::RenderSystemRaylib::Text(const char* text, int pos_x, int pos_y, int font_size, Color color) {
+	DrawText(text, pos_x, pos_y, font_size, toRaylibColor(color));
 }

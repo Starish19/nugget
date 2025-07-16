@@ -6,7 +6,7 @@ namespace nugget {
 
 	struct Component {
 	public:
-		Component() {}
+		//Component() {}
 		Component(nugget::GameObject* g) : m_GameObject(g) {}
 		virtual ~Component() {}
 
@@ -14,6 +14,6 @@ namespace nugget {
 		virtual void Update(float dt) = 0;
 
 	protected:
-		const GameObject* m_GameObject;
+		GameObject* const m_GameObject;
 	};
 }

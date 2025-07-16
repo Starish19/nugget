@@ -106,14 +106,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RENDERSYSTEM_RAYLIB;AUDIOSYSTEM_RAYLIB;INPUTSYSTEM_RAYLIB;RESOURCESYSTEMRAYLIB;RANDOMRAYLIB</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\raylib;$(SolutionDir)include\minizip;$(SolutionDir)include\zlib;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include\raylib;$(SolutionDir)include\minizip;$(SolutionDir)include\zlib;$(SolutionDir)include\soLoud</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\raylib;$(SolutionDir)lib\minizip;$(SolutionDir)lib\zlib;$(SolutionDir)lib\Tetris;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstatic.lib;minizip.lib;raylib.lib;winmm.lib;Tetris.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\raylib;$(SolutionDir)lib\minizip;$(SolutionDir)lib\zlib;$(SolutionDir)lib\Tetris;$(SolutionDir)lib\soLoud;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>zlibstatic.lib;minizip.lib;raylib.lib;winmm.lib;Tetris.lib;soLoud.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -163,7 +163,6 @@
     <ClInclude Include="NuggetScene.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="RandomRaylib.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceSystemRaylib.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="zipFile.h" />

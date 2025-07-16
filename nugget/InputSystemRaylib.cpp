@@ -54,6 +54,7 @@ bool nugget::InputSystemRaylib::MousePressed(int button) {
 	return IsMouseButtonPressed(button);
 }
 
-Vector2 nugget::InputSystemRaylib::MousePos() {
-	return GetMousePosition();
+nugget::coords nugget::InputSystemRaylib::MousePos() {
+	Vector2 pos = GetMousePosition();
+	return coords{ (int)pos.x, (int)pos.y };
 }

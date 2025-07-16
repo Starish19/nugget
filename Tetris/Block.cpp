@@ -7,7 +7,6 @@ Block::Block(nugget::grid* grid, Tetromino minos, std::string color) {
 	auto inputComp = addComponent<nugget::inputComponent>();
 	inputComp->setKeys(keys);
 
-
 	//Render Component
 	auto renderComp = addComponent<renderComponent_Grid_Shape>();
 	renderComp->setTexture(color);
@@ -20,9 +19,8 @@ Block::Block(nugget::grid* grid, Tetromino minos, std::string color) {
 	auto audioComp = addComponent<nugget::audioComponent>();
 	audioComp->SetSound("yipee");
 
-
 	//Delayed Events
-	auto timeComp = addComponent<nugget::TimeKeep>();
+	auto timeComp = addComponent<nugget::TimeKeepComponent>();
 	//Move Down every second
 	timeComp->addTrigger([=]() {
 		renderComp->move({ 0,1 });

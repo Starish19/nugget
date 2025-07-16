@@ -6,15 +6,14 @@ void MainMenu::Start() {
 	std::unique_ptr<nugget::GameObject> button = std::make_unique<nugget::GameObject>();
 	m_objects["Start"] = std::move(button);
 
-	nugget::coords buttonPos = { 200,200 };
-	nugget::dimensions buttonDim = { 200,200 };
+	nugget::Rectangle buttonRect{ 200,200,200,200 };
 
 	auto InputComp = m_objects["Start"]->addComponent<nugget::inputComponent>();
-	InputComp->addButton([=]() {m_app->switchScene("Main"); }, buttonPos, buttonDim);
+	InputComp->addButton([=]() {m_app->switchScene("Main"); }, buttonRect);
 
 	auto RenderComp = m_objects["Start"]->addComponent<nugget::renderComponent_Rect>();
-	RenderComp->setRect(buttonPos.posX, buttonPos.posY, buttonDim.width, buttonDim.Height);
-	RenderComp->setColor(200,200,200,255);
+	RenderComp->setRect(buttonRect);
+	RenderComp->setColor(nugget::Color{ 200,200,200,255 });
 
 	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
 		it->second->Start();

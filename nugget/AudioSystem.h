@@ -11,9 +11,9 @@ namespace nugget {
 	class AudioSystem : public subsystem
 	{
 	public:
-		virtual void PlayNoise(Sound* sound) = 0; // Play sound once
+		virtual void PlayNoise(Sound* sound, float volume = 0.1) = 0; // Play sound once
 
-		virtual void StartMusic(Music* music, bool loop) = 0; // Play longer music with option for automatic looping
+		virtual void StartMusic(Music* music, bool loop = true) = 0; // Play longer music with option for automatic looping
 		virtual void EndMusic() = 0; // Permanently stop music
 
 		virtual void Pause() = 0; // Temporary stop music
@@ -21,7 +21,7 @@ namespace nugget {
 
 	protected:
 		// music stream stored in smart pointer
-		std::unique_ptr<Music> m_music;
+		Music* m_music;
 	};
 
 	//Global instance of Audio System

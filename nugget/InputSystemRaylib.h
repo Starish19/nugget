@@ -18,6 +18,6 @@ namespace nugget {
         void KeyList(std::unordered_map<int, bool> &keys) final;
 
         bool MousePressed(int button) final;
-        Vector2 MousePos() final;
+        coords MousePos() final;
     };
 }

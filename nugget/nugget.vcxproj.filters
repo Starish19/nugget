@@ -28,6 +28,12 @@
     <Filter Include="Source Files\unZip">
       <UniqueIdentifier>{d62de93a-cbda-4c8a-a422-f2e1cdad2767}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\soLoud">
+      <UniqueIdentifier>{50c527ef-a69d-4f84-a092-f19082de49b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\soLoud">
+      <UniqueIdentifier>{220ff3bb-07c0-4c7b-890a-78301daf71ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -111,9 +117,6 @@
       <Filter>Header Files\abstractions</Filter>
     </ClInclude>
     <ClInclude Include="Components.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="grid.h">

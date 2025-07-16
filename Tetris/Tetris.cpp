@@ -22,3 +22,6 @@ void Tetris::Update(float dt) {
 void Tetris::Render() {
 	current_scene->Render();
 }
+
+void Tetris::Shutdown() {
+}
