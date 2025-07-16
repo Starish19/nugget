@@ -4,7 +4,9 @@
 mainGame::mainGame(nugget::NuggetApplicazione* app) : nugget::NuggetScene(app) {}
 
 void mainGame::Start() {
-	nugget::nugResource->LoadImage("mudkip", "assets", "assets/images/mudkip.png");
+	BlockCount = 0;
+	pauseToggle = false;
+
 	nugget::nugResource->LoadImage(Z_COLOR, "assets", "assets/images/RedRubix.png");
 	nugget::nugResource->LoadImage(J_COLOR, "assets", "assets/images/BlueRubix.png");
 	nugget::nugResource->LoadImage(I_COLOR, "assets", "assets/images/CyanRubix.png");
@@ -28,7 +30,7 @@ void mainGame::Start() {
 	m_objects["pause"] = std::move(pauseMenu);
 	auto renderComp = m_objects["pause"]->addComponent<nugget::renderComponent_Rect>();
 	renderComp->setRect(nugget::Rectangle{0,0, nugget::nugRender->getWidth(), nugget::nugRender->getHeight()});
-	renderComp->setColor(nugget::Color{ 200,200,200,150 });
+	renderComp->setColor(nugget::Color{200,200,200,200});
 	renderComp->render = false;
 
 	activeBlock = newBlock();
@@ -48,6 +50,7 @@ void mainGame::Update(float dt) {
 			activeBlock->active = false;
 			activeBlock = newBlock();
 			activeBlock->Start();
+			activeBlock->getComponent<nugget::audioComponent>()->Play();
 		}
 	}  
 
@@ -57,9 +60,17 @@ void mainGame::Update(float dt) {
 		}
 		pauseToggle = !pauseToggle;
 	}
+
+	if (pauseToggle && nugget::nugInput->MousePressed(nugget::MOUSE_BUTTON_LEFT)) {
+		m_app->switchScene("Menu");
+	}
 }
 
 void mainGame::Render() {
+	nugget::coords pos = map.getCellPosition(0, 0);
+	nugget::dimensions dim = map.getGridDimensions();
+	nugget::nugRender->Draw(nugget::Rectangle{ pos.posX, pos.posY, dim.width, dim.Height }, nugget::Color{ 50,50,50,200 });
+
 	for (auto it = m_objects.begin(); it != m_objects.end(); it++) {
 		if (auto renderable = it->second->getSubComponent<nugget::Renderable>()) {
 			if (renderable->render) renderable->Render();
@@ -73,7 +84,19 @@ void mainGame::Render() {
 }
 
 void mainGame::Close() {
+	nugget::nugAudio->EndMusic();
 
+	m_objects.clear();
+
+	nugget::nugResource->unload(Z_COLOR);
+	nugget::nugResource->unload(J_COLOR);
+	nugget::nugResource->unload(I_COLOR);
+	nugget::nugResource->unload(S_COLOR);
+	nugget::nugResource->unload(O_COLOR);
+	nugget::nugResource->unload(L_COLOR);
+	nugget::nugResource->unload(T_COLOR);
+	nugget::nugResource->unload("yipee");
+	nugget::nugResource->unload("agent_squidge");
 }
 
 Block* mainGame::newBlock() {

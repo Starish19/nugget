@@ -1,7 +1,6 @@
 #pragma once
 #include "ResourceSystem.h"
 #include "zipFile.h"
-#include "raylib.h"
 
 namespace nugget {
 	class ResourceSystemRaylib : public ResourceSystem
@@ -16,9 +15,13 @@ namespace nugget {
 		Wave* LoadWave(const std::string& name, const std::string& handle, const std::string& filePath) final;
 		Music* LoadMusic(const std::string& name, const std::string& handle, const std::string& filePath) final;
 
+		std::unique_ptr<std::vector<unsigned char>> LoadFile(const std::string& name, const std::string& handle, const std::string& filePath) final;
+
 		Image* getImage(const std::string& name) final;
 		Wave* getWave(const std::string& name) final;
 		Music* getMusic(const std::string& name) final;
+
+		void unload(const std::string& name) final;
 
 		Texture* getTextureFromImage(const std::string& name) final;
 		Sound* getSoundFromWave(const std::string& name) final;

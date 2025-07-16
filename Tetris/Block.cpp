@@ -11,7 +11,7 @@ Block::Block(nugget::grid* grid, Tetromino minos, std::string color) {
 	auto renderComp = addComponent<renderComponent_Grid_Shape>();
 	renderComp->setTexture(color);
 	renderComp->setGrid(grid);
-	renderComp->m_pos = nugget::coords{ 5,0 };
+	renderComp->m_pos = nugget::coords{ 8,0 };
 	renderComp->setShape(minos);
 
 

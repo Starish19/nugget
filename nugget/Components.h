@@ -104,7 +104,7 @@ namespace nugget{
 	protected:
 		std::string text = "";
 		coords pos{50,50};
-		Color color{ 200,200,200,100 };
+		Color color{ 0,0,0,255 };
 		int size = 50;
 	};
 
@@ -147,7 +147,9 @@ namespace nugget{
 		~audioComponent() {}
 
 		void Start() override {}
-		void Update(float dt) override {nugAudio->PlayNoise(snd);}
+		void Update(float dt) override {}
+
+		void Play() {nugAudio->PlayNoise(snd);}
 
 		virtual void SetSound(const std::string snd_id) {
 			snd = nugResource->getSoundFromWave(snd_id);

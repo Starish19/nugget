@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ResourceSystemRaylib.h"
+#include "raylib.h"
 
 #ifdef RESOURCESYSTEMRAYLIB
 nugget::ResourceSystemRaylib nugResourceSystemRaylib;
@@ -46,27 +47,27 @@ Wave* nugget::ResourceSystemRaylib::LoadWave(const std::string& name, const std:
 }
 
 Music* nugget::ResourceSystemRaylib::LoadMusic(const std::string& name, const std::string& handle, const std::string& filePath) {
-	std::vector<unsigned char> buffer(GetFileLength("assets/audio/Agent_Squidge.mp3"));
+	std::vector<unsigned char> buffer(200000);
+
+	file* file = files[handle].get();
+	int totalread = file->LoadData(filePath.c_str(), buffer);
+
+	streams[name] = std::move(buffer);
+
+	Music mus = LoadMusicStreamFromMemory(".mp3", &streams[name][0], totalread);
+
+	musics[name] = mus;
+	return &musics[name];
+}
+
+std::unique_ptr<std::vector<unsigned char>> nugget::ResourceSystemRaylib::LoadFile(const std::string& name, const std::string& handle, const std::string& filePath) {
+	std::unique_ptr<std::vector<unsigned char>> buffer = std::make_unique<std::vector<unsigned char>>(6000);
 
 	file* file = files[handle].get();
 
-	int totalread = file->LoadData(filePath.c_str(), buffer);
-	Music mus = LoadMusicStreamFromMemory(".mp3", &buffer[0], totalread);
+	int totalread = file->LoadData(filePath.c_str(), *buffer);
 
-	int dataSize = GetFileLength("assets/audio/Agent_Squidge.mp3");
-	unsigned char* data = LoadFileData(filePath.c_str(), &dataSize);
-
-	for (int i = 0; i < buffer.size()-1; i++) {
-		if (data[i] != buffer[i]) {
-			nugget::file();
-		}
-	}
-
-	Music mus2 = LoadMusicStreamFromMemory(".mp3", data, dataSize);
-
-	musics[name] = mus;
-
-	return &musics[name];
+	return std::move(buffer);
 }
 
 Image* nugget::ResourceSystemRaylib::getImage(const std::string& name) {
@@ -91,4 +92,31 @@ Sound* nugget::ResourceSystemRaylib::getSoundFromWave(const std::string& name) {
 	if (snds.find(name) == snds.end())
 		snds[name] = LoadSoundFromWave(wavs[name]);
 	return &snds[name];
+}
+
+void nugget::ResourceSystemRaylib::unload(const std::string& name) {
+	if (imgs.find(name) != imgs.end()) {
+		UnloadImage(imgs[name]);
+		imgs.erase(name);
+	}
+	if (texs.find(name) != texs.end()) {
+		UnloadTexture(texs[name]);
+		texs.erase(name);
+	}
+	if (snds.find(name) != snds.end()) {
+		UnloadSound(snds[name]);
+		snds.erase(name);
+	}
+	if (wavs.find(name) != wavs.end()) {
+		UnloadWave(wavs[name]);
+		wavs.erase(name);
+	}
+	if (musics.find(name) != musics.end()) {
+		UnloadMusicStream(musics[name]);
+		musics.erase(name);
+	}
+	if (streams.find(name) != streams.end()) {
+		streams[name].clear();
+		streams.erase(name);
+	}
 }

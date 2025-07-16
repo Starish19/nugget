@@ -24,4 +24,5 @@ void Tetris::Render() {
 }
 
 void Tetris::Shutdown() {
+	current_scene->Close();
 }

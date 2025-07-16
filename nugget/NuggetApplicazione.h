@@ -8,8 +8,8 @@ namespace nugget {
 		float MasterVolume = 0.5;
 		int frameRate = 30;
 		Color ClearColor{ 0, 121, 241, 255 };
-		int WindowWidth = 600;
-		int WindowHeight = 900;
+		int WindowWidth = 400;
+		int WindowHeight = 600;
 		const char* WindowName = "Nugget Engine";
 	};
 

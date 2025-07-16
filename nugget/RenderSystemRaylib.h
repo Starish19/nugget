@@ -1,6 +1,6 @@
 #pragma once
-#include "raylib.h"
 #include "RenderSystem.h"
+#include "raylib.h"
 
 namespace nugget {
 	class RenderSystemRaylib : public RenderSystem
@@ -13,7 +13,12 @@ namespace nugget {
 		void Shutdown() final;
 
 		void setWindowParams(int width, int height, const char* title) final;
+		void setWindowIcon(Image* img) final;
 		void setClear(Color color) final;
+		void setFPS(int frams) final;
+		bool closeWindow() final;
+
+		float getDeltaTime() final;
 
 		int getWidth() final;
 		int getHeight() final;

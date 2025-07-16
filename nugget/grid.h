@@ -13,6 +13,10 @@ namespace nugget {
 			return coords{ posX + b.posX, posY + b.posY };
 		}
 
+		bool operator >=(coords b) {
+			return posX >= b.posX || posY >= b.posY;
+		}
+
 		bool operator >(coords b) {
 			return posX > b.posX || posY > b.posY;
 		}
@@ -69,7 +73,6 @@ namespace nugget {
 
 	protected:
 		coords start;
-
 		dimensions Width_Height;
 
 		int rows;

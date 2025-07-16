@@ -17,7 +17,7 @@ nugget::RenderSystemRaylib::~RenderSystemRaylib() {
 }
 
 void nugget::RenderSystemRaylib::Initalize() {
-	InitWindow(600,900,"Nugget Engine");
+	InitWindow(500,600,"Nugget Engine");
 }
 
 void nugget::RenderSystemRaylib::Shutdown() {
@@ -29,6 +29,24 @@ void nugget::RenderSystemRaylib::setWindowParams(int width, int height, const ch
 	win_height = height;
 	SetWindowSize(width, height);
 	SetWindowTitle(title);
+}
+
+void nugget::RenderSystemRaylib::setWindowIcon(Image* img) {
+	if (!img)
+		SetWindowIcon(LoadImage("nugget.png"));
+	else SetWindowIcon(*img);
+}
+
+void nugget::RenderSystemRaylib::setFPS(int frames) {
+	SetTargetFPS(frames);
+}
+
+bool nugget::RenderSystemRaylib::closeWindow() {
+	return WindowShouldClose();
+}
+
+float nugget::RenderSystemRaylib::getDeltaTime() {
+	return GetFrameTime();
 }
 
 void nugget::RenderSystemRaylib::setClear(Color color) {
@@ -64,7 +82,7 @@ void nugget::RenderSystemRaylib::Draw(Texture2D* texture, Rectangle rect) {
 }
 
 void nugget::RenderSystemRaylib::Draw(Rectangle rect, Color color) {
-	DrawRectangleRec(toRaylibRect(rect), RAYLIB_H::Color{color.r, color.g, color.b, color.a});
+	DrawRectangleRec(toRaylibRect(rect), toRaylibColor(color));
 }
 
 void nugget::RenderSystemRaylib::Text(const char* text, int pos_x, int pos_y, int font_size, Color color) {

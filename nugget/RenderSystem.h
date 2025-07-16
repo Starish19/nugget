@@ -3,6 +3,7 @@
 
 //Forward Declarations
 struct Texture;
+struct Image;
 
 namespace nugget {
 	struct Color {
@@ -25,7 +26,12 @@ namespace nugget {
 	public: 
 		//After Init creates default window, set custom parameters
 		virtual void setWindowParams(int width, int height, const char* title) = 0;
+		virtual void setWindowIcon(Image* img) = 0;
 		virtual void setClear(Color color) = 0;
+		virtual void setFPS(int frames) = 0;
+		virtual bool closeWindow() = 0;
+
+		virtual float getDeltaTime() = 0;
 
 		virtual int getWidth() = 0; // Window Width
 		virtual int getHeight() = 0; // Window Height

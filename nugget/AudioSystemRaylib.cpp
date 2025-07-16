@@ -23,6 +23,10 @@ void nugget::AudioSystemRaylib::Shutdown() {
 	CloseAudioDevice();
 }
 
+void nugget::AudioSystemRaylib::setMasterVolume(float volume) {
+	SetMasterVolume(volume);
+}
+
 void nugget::AudioSystemRaylib::PlayNoise(Sound* sound, float volume) {
 	SetSoundVolume(*sound, volume);
 	if (!IsSoundPlaying(*sound)) PlaySound(*sound);
@@ -38,14 +42,23 @@ void nugget::AudioSystemRaylib::StartMusic(Music* music, bool loop) {
 	m_music = music;
 }
 
+void nugget::AudioSystemRaylib::UpdateMusic() {
+	if (m_music)
+		UpdateMusicStream(*m_music);
+}
+
 void nugget::AudioSystemRaylib::EndMusic() {
-	StopMusicStream(*m_music);
+	if (m_music)
+		StopMusicStream(*m_music);
+	m_music = nullptr;
 }
 
 void nugget::AudioSystemRaylib::Pause() {
-	PauseMusicStream(*m_music);
+	if (m_music)
+		PauseMusicStream(*m_music);
 }
 
 void nugget::AudioSystemRaylib::Resume() {
-	ResumeMusicStream(*m_music);
+	if (m_music)
+		ResumeMusicStream(*m_music);
 }

@@ -6,7 +6,7 @@ void MainMenu::Start() {
 	std::unique_ptr<nugget::GameObject> button = std::make_unique<nugget::GameObject>();
 	m_objects["Start"] = std::move(button);
 
-	nugget::Rectangle buttonRect{ 200,200,200,200 };
+	nugget::Rectangle buttonRect{ 100,100,200,200 };
 
 	auto InputComp = m_objects["Start"]->addComponent<nugget::inputComponent>();
 	InputComp->addButton([=]() {m_app->switchScene("Main"); }, buttonRect);

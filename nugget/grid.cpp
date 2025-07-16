@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "grid.h"
 
-nugget::grid::grid(coords s, dimensions d, int r, int c) : start{ s }, Width_Height{ d }, rows(r - 1), columns(c - 1) {
+nugget::grid::grid(coords s, dimensions d, int r, int c) : start{ s }, Width_Height{ d }, rows(r), columns(c) {
 };
 
 nugget::coords nugget::grid::getCellPosition(int row, int column) {
@@ -21,14 +21,14 @@ nugget::dimensions nugget::grid::getCellDimensions() {
 }
 
 bool nugget::grid::attemptMove(coords from, coords to) {
-	if ((from + to) > coords{ rows,columns } || coords{ 0,0 } > (from + to))
+	if ((from + to) >= coords{ rows,columns } || coords{ 0,0 } > (from + to))
 		return true;
 	else return false;
 }
 
 bool nugget::grid::attemptRotate90(coords toRotate, coords rotateAround) {
 	toRotate.rotate90(rotateAround);
-	if (toRotate > coords{ rows,columns } || coords{ 0,0 } > toRotate)
+	if (toRotate >= coords{ rows,columns } || coords{ 0,0 } > toRotate)
 		return true;
 	else return false;
 }

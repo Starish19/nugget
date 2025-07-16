@@ -12,9 +12,12 @@ namespace nugget {
 		void Initalize() final;
 		void Shutdown() final;
 
+		void setMasterVolume(float volume) final;
+
 		void PlayNoise(Sound* sound, float volume) final;
 
 		void StartMusic(Music* music, bool loop) final;
+		void UpdateMusic() final;
 		void EndMusic() final;
 
 		void Pause() final;

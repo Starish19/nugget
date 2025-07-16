@@ -2,8 +2,6 @@
 #include "nugget.h"
 #include "raylib.h"
 
-#include <iostream>
-
 using namespace nugget;
 
 int main() {
@@ -16,33 +14,24 @@ int main() {
 	nugget::nugApp->Initalize();
 	defaults app_defaults = nugApp->getDefaults();
 
-
 	nugRender->setWindowParams(app_defaults.WindowWidth, app_defaults.WindowHeight, app_defaults.WindowName);
 	nugRender->setClear(app_defaults.ClearColor);
-	//SetWindowIcon(RAYLIB_H::LoadImage("assets/images/nugget.png"));
+	nugRender->setWindowIcon(nullptr);
+	nugRender->setFPS(app_defaults.frameRate);
 	
-	SetMasterVolume(app_defaults.MasterVolume);
-	SetTargetFPS(app_defaults.frameRate);
-
-	Music* mus = nugget::nugResource->LoadMusic("agent_squidge", "assets", "assets/audio/Agent_Squidge.mp3");
-
-	nugget::nugAudio->StartMusic(mus);
+	nugAudio->setMasterVolume(app_defaults.MasterVolume);
 
 	int frame = 0;
-	while (!WindowShouldClose()) {
-		nugget::nugApp->Update(GetFrameTime());
+	while (!nugRender->closeWindow()) {
+		nugApp->Update(nugRender->getDeltaTime());
 
-		std::cout << frame++ << std::endl;
+		nugAudio->UpdateMusic();
 
-		UpdateMusicStream(*mus);
+		nugRender->StartDrawing();
 
-		nugget::nugRender->StartDrawing();
+		nugApp->Render();
 
-		nugget::nugApp->Render();
-
-		nugget::nugRender->FinishDrawing();
-
-		nugget::nugAudio->Resume();
+		nugRender->FinishDrawing();
 	}
 
 	nugAudio->Shutdown();

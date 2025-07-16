@@ -5,8 +5,7 @@
 namespace nugget {
 	class NuggetApplicazione;
 
-	class NuggetScene
-	{
+	class NuggetScene {
 	public:
 		NuggetScene(NuggetApplicazione* app) : m_app(app) {};
 
